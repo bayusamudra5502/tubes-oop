@@ -32,7 +32,7 @@ e2e: build-actual test-io
 
 unit-test:	$(ALL_UNIT_TEST) $(SRCS_NO_MAIN)
 	@mkdir -p bin
-	@g++ -std=c++17 -Wall -o ./bin/test $^ -lgtest
+	@g++ -std=c++17 -Wall -o ./bin/test $^ -lgtest -pthread
 	@./bin/test
 
 install:
