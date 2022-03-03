@@ -53,7 +53,7 @@ jobs:
         with:
           msystem: MINGW64
           install: >-
-            g++
+            gcc
             make
       - name: Membuat Folder
         run: mkdir bin build

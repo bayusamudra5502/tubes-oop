@@ -12,7 +12,7 @@ all: compile build-actual e2e
 # Compile all cpp files except check.cpp
 ./bin/main:
 	@mkdir -p bin
-	@g++ -std=c++17 -I"./src/headers" -Wall -o bin/main $(ALL_SRCS)
+	@g++ -std=c++17 -I"./src/headers" -Wall -O3 -o bin/main $(ALL_SRCS)
 
 compile: ./bin/main
 
@@ -25,14 +25,14 @@ build-actual: $(TC_FOLDER)/*.$(EXT_IN) compile
 # Check
 test-io: tests/engine/check.cpp ./bin/main
 	@mkdir -p bin
-	@g++ -std=c++17 -Wall -o ./bin/checker $<
+	@g++ -g -std=c++17 -Wall -o ./bin/checker $<
 	@./bin/checker
 
 e2e: build-actual test-io
 
 unit-test:	$(ALL_UNIT_TEST) $(SRCS_NO_MAIN)
 	@mkdir -p bin
-	@g++ -std=c++17 -Wall -o ./bin/test $^ -lgtest -pthread
+	@g++ -g -std=c++17 -Wall -o ./bin/test $^ -lgtest -pthread
 	@./bin/test
 
 install:
@@ -43,4 +43,11 @@ test: unit-test e2e
 clean:
 	@rm -rf bin/*
 
-.PHONY: check e2e build-actual test-io clean
+run:
+	@mkdir -p bin
+	@g++ -g -std=c++17 -I"./src/headers" -Wall -o bin/main $(ALL_SRCS)
+	@./bin/main
+
+build: compile
+
+.PHONY: check e2e build-actual test-io clean test build
