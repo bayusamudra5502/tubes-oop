@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#define TEST_PATH "./tests"
+#define TEST_PATH "./tests/test_case"
 
 using namespace std;
 
@@ -38,5 +38,5 @@ int main() {
   }
 
   cout << correct << " out of " << total << " tests passed." << endl;
-  return 0;
+  return correct == total ? 0 : -1;
 }

@@ -6,21 +6,20 @@ EXECUTABLE_FILENAME = main
 ALL_SRCS := $(wildcard *.cpp)
 SRCS     := $(filter-out check.cpp, $(ALL_SRCS))
 
-all: compile test check
+all: compile build-actual check
 
 # Compile all cpp files except check.cpp
 compile:
-	g++ -std=c++17 -o $(EXECUTABLE_FILENAME) $(SRCS)
+	g++ -std=c++17 -Wall -o $(EXECUTABLE_FILENAME) $(SRCS)
 
-# Test
-test: $(TC_FOLDER)/*.$(EXT_IN) $(EXECUTABLE_FILENAME)
+build-actual: $(TC_FOLDER)/*.$(EXT_IN) $(EXECUTABLE_FILENAME)
 	for inputfile in $(TC_FOLDER)/*.$(EXT_IN); do \
 		./$(EXECUTABLE_FILENAME) < $$inputfile; \
 	done;
 
 # Check
-check: FORCE check.cpp
+check: check.cpp
 	g++ -std=c++17 -o check check.cpp
 	./check
 
-FORCE: ;
+.PHONY: check
