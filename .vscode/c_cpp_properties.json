@@ -5,7 +5,8 @@
       "cppStandard": "c++17",
       "intelliSenseMode": "linux-gcc-x64",
       "compilerPath": "/usr/bin/gcc",
-      "cStandard": "c17"
+      "cStandard": "c17",
+      "includePath": ["${workspaceFolder}/**", "${workspaceFolder}/src/headers"]
     }
   ],
   "version": 4
