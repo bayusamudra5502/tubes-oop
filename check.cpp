@@ -4,17 +4,19 @@
 #include <iostream>
 #include <string>
 
+#define TEST_PATH "./tests"
+
 using namespace std;
 
 int main() {
   int correct = 0, total = 0;
 
-  for (const auto &entry : filesystem::directory_iterator("./tests")) {
+  for (const auto &entry : filesystem::directory_iterator(TEST_PATH)) {
     string filename = entry.path().filename().string();
     if (filename.size() >= 3 && filename.substr(filename.size() - 3) == "ans") {
       total++;
       ifstream answerFile(entry.path());
-      ifstream outputFile("./tests/" + entry.path().stem().string() + ".out");
+      ifstream outputFile(TEST_PATH + entry.path().stem().string() + ".out");
       string answer, output;
       bool same = true;
       while (getline(answerFile, answer) && getline(outputFile, output)) {
