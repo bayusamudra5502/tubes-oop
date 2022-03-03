@@ -1,0 +1,94 @@
+name: Check Unit Test
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  test:
+    name: Testing TC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Menginstall Depedencies
+        run: make install
+      - name: Membuat Folder
+        run: mkdir bin
+      - name: Testing semua TC
+        run: make test
+  linux:
+    needs: test
+    name: Build untuk Linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Membuat Folder
+        run: mkdir bin build
+      - name: Kompilasi Program
+        run: make build
+      - name: Membuat Arsip
+        run: |
+          mkdir dist
+          cd bin
+          mv main craft
+          tar -czf ../dist/linux-craft.tar.gz craft
+          cd ..
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux64-bin
+          path: dist/linux-craft.tar.gz
+  windows:
+    needs: test
+    name: Build di WIndows
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup mysys2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          install: >-
+            g++
+            make
+      - name: Membuat Folder
+        run: mkdir bin build
+      - name: Build Mobilita untuk Windows
+        run: make build
+      - name: Copy ke dist
+        run: |
+          mkdir dist
+          cp ./bin/* ./dist/
+          mv ./dist/main.exe ./dist/craft.exe
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: win64-bin
+          path: dist/craft.exe
+  packaging:
+    needs: [windows, linux]
+    name: Membuat Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Program Linux
+        uses: actions/download-artifact@v2
+        with:
+          name: linux64-bin
+      - name: Download Program Windows
+        uses: actions/download-artifact@v2
+        with:
+          name: win64-bin
+      - name: Rename Binary windows
+        run: mv craft.exe win-craft.exe
+      - name: Buat Release di github
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            win-craft.exe
+            linux-craft.tar.gz

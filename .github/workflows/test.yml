@@ -1,0 +1,16 @@
+name: Check Unit Test
+
+on: push
+
+jobs:
+  test:
+    name: Testing TC
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Menginstall Depedencies
+        run: make install
+      - name: Membuat Folder
+        run: mkdir bin
+      - name: Testing semua TC
+        run: make test
