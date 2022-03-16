@@ -1,17 +1,14 @@
-#ifndef COLLECTION_CONTAINER_HPP
-#define COLLECTION_CONTAINER_HPP
+#pragma once
+#include <Slot.hpp>
 
-template <class item>
 class CollectionContainer {
     private:
-        item container;
-        int idxType;
-        int size;
+        vector<vector<Slot>> container;
+        int mxRow; // banyak baris
+        int mxCol; // banyak kolom
     public:
-        collectionContainer(int size);
-        insertItem(int idxType, int idxPosisi, item Item);
-        deleteItem(int idxType, int idxPosisi);
-        getIterator(int idxType, int idxPosisi);
+        CollectionContainer(int mxRow, int mxCol);
+        void insertItem(int idxPosisi, Item* Item);
+        void deleteItem(int idxPosisi);
+        void getIterator(int idxPosisi);
 };
-
-#endif
