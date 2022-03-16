@@ -65,12 +65,20 @@ void CollectionContainer::insertItem(Position p, Item *item)
     {
         // exception
     }
+    else if (this->container[p.row][p.col].empty())
+    {
+        Slot s = Slot(0,item);
+        this->container[p.row][p.col].operator=(s);
+    }
     else
     {
-        if (this -> container[p.row][p.col].get_contents()->get_name() != item->get_name()) {
+        if (this->container[p.row][p.col].get_contents()->get_name() != item->get_name())
+        {
             // exception, nama tidak sama
-        } else {
-            this -> container[p.row][p.col].insert();
+        }
+        else
+        {
+            this->container[p.row][p.col].insert();
         }
     }
 }
@@ -83,7 +91,7 @@ void CollectionContainer::deleteItem(Position p)
     }
     else
     {
-        
+        this->container[p.row][p.col].remove();
     }
 }
 
