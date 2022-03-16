@@ -15,7 +15,7 @@ CollectionContainer::CollectionContainer(int mxRow, int mxCol)
         vector<Slot> s;
         for (int j = 0; j < this->mxCol; j++)
         {
-            s.push_back(Slot());
+            s.push_back(Slot(i*mxCol + j+1));
         }
         container.push_back(s);
     }
@@ -40,6 +40,13 @@ CollectionContainer::CollectionContainer(const CollectionContainer &cc)
 // destructor
 CollectionContainer::~CollectionContainer()
 {
+    for(auto& p: this->container){
+        for(auto q: p){
+            q.~Slot();
+        }
+        p.clear();
+    }
+    this->container.clear();
 }
 
 // operator
@@ -59,7 +66,7 @@ CollectionContainer &CollectionContainer::operator=(CollectionContainer &cc)
     }
 }
 
-void CollectionContainer::insertItem(Position p, Item *item)
+void CollectionContainer::insertItem(Position p, Item *item, int count=1)
 {
     if (this->container[p.row][p.col].full())
     {
@@ -67,23 +74,22 @@ void CollectionContainer::insertItem(Position p, Item *item)
     }
     else if (this->container[p.row][p.col].empty())
     {
-        Slot s = Slot(0,item);
-        this->container[p.row][p.col].operator=(s);
+        this->container[p.row][p.col].insert(item, count);
     }
     else
     {
-        if (this->container[p.row][p.col].get_contents()->get_name() != item->get_name())
+        if (this->container[p.row][p.col].get_contents()->getName() != item->getName())
         {
             // exception, nama tidak sama
         }
         else
         {
-            this->container[p.row][p.col].insert();
+            this->container[p.row][p.col].insert(item, count);
         }
     }
 }
 
-void CollectionContainer::deleteItem(Position p)
+void CollectionContainer::deleteItem(Position p, int count)
 {
     if (this->container[p.row][p.col].empty())
     {
@@ -91,7 +97,7 @@ void CollectionContainer::deleteItem(Position p)
     }
     else
     {
-        this->container[p.row][p.col].remove();
+        this->container[p.row][p.col].remove(count);
     }
 }
 
@@ -101,4 +107,13 @@ void CollectionContainer::getIterator(Position p)
 
 bool CollectionContainer::isEmpty(Position p) {
     return this -> container[p.row][p.col].empty();
+}
+
+ofstream &operator<<(ofstream &stream, const CollectionContainer &cc){
+    for(auto p: cc.container){
+        for(auto q: p){
+            stream << q;
+        }
+    }
+    return stream;
 }

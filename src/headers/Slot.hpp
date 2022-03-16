@@ -6,6 +6,7 @@ class Slot{
         int id;
         Item* contents;
         int available_slot;
+        int occupied;
     public:
         Slot();
         Slot(int id);
@@ -17,12 +18,13 @@ class Slot{
 
         bool empty();
         bool full();
-        void insert(int count=1); 
+        void insert(Item* item, int count=1); 
         void remove(int count=1);
 
         int get_id();
         Item* get_contents();
         int get_available_slot();
+        int get_occupied();
 
         friend ofstream& operator<<(ofstream& stream, const Slot& slot);
 };

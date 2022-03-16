@@ -30,11 +30,11 @@ public:
     // operator
     CollectionContainer &operator=(CollectionContainer &cc);
 
-    void insertItem(Position p, Item *item);
-    void deleteItem(Position p);
+    void insertItem(Position p, Item *item, int count=1);
+    void deleteItem(Position p, int count=1);
 
     bool isEmpty(Position p);
     void getIterator(Position p);
-    //friend ofstream &operator<<(ofstream &stream, const CollectionContainer &cc);
+    friend ofstream &operator<<(ofstream &stream, const CollectionContainer &cc);
 
 };
