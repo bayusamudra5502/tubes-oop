@@ -10,6 +10,8 @@ class Item{
     public:
         bool operator==(const Item& other);
         bool operator!=(const Item& other);
+        string get_name();
+        int get_mxStack();
 
 };
 

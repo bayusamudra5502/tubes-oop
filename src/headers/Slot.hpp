@@ -20,5 +20,9 @@ class Slot{
         void insert(int count=1); 
         void remove(int count=1);
 
+        int get_id();
+        Item* get_contents();
+        int get_available_slot();
+
         friend ofstream& operator<<(ofstream& stream, const Slot& slot);
 };

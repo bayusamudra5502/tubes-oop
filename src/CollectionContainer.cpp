@@ -67,6 +67,11 @@ void CollectionContainer::insertItem(Position p, Item *item)
     }
     else
     {
+        if (this -> container[p.row][p.col].get_contents()->get_name() != item->get_name()) {
+            // exception, nama tidak sama
+        } else {
+            
+        }
     }
 }
 

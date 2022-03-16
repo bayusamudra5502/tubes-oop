@@ -44,6 +44,18 @@ void Slot::remove(int count=1){
 
 }
 
+int Slot::get_id() {
+    return this -> id;
+}
+
+Item* Slot::get_contents() {
+    return this -> contents;
+}
+
+int Slot::get_available_slot() {
+    return this -> available_slot;
+}
+
 ofstream& operator<<(ofstream& stream, const Slot& slot){
 
 }
