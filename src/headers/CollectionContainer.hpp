@@ -1,6 +1,11 @@
 #pragma once
 #include <Slot.hpp>
 
+
+struct Position {
+    int row,col;
+};
+
 class CollectionContainer
 {
 private:
@@ -20,8 +25,8 @@ public:
     // operator
     CollectionContainer &operator=(CollectionContainer &cc);
 
-    void insertItem(int idxPosisi, Item *Item);
-    void deleteItem(int idxPosisi);
-    void getIterator(int idxPosisi);
+    void insertItem(Position p, Item *Item);
+    void deleteItem(Position p);
+    void getIterator(Position p);
     //friend ofstream &operator<<(ofstream &stream, const CollectionContainer &cc);
 };
