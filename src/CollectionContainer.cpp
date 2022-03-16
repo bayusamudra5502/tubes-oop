@@ -30,12 +30,22 @@ CollectionContainer &CollectionContainer::operator=(CollectionContainer &cc)
     CollectionContainer(cc);
 }
 
-void CollectionContainer::insertItem(Position p, Item *Item)
+void CollectionContainer::insertItem(Position p, Item *item)
 {
+    if (this -> container[p.row][p.col].full()) {
+        // exception
+    } else {
+        
+    }
 }
 
 void CollectionContainer::deleteItem(Position p)
 {
+    if (this -> container[p.row][p.col].empty()) {
+        // exception
+    } else {
+       
+    }
 }
 
 void CollectionContainer::getIterator(Position p)
