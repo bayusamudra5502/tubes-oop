@@ -98,3 +98,7 @@ void CollectionContainer::deleteItem(Position p)
 void CollectionContainer::getIterator(Position p)
 {
 }
+
+bool CollectionContainer::isEmpty(Position p) {
+    return this -> container[p.row][p.col].empty();
+}

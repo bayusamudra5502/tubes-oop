@@ -32,6 +32,8 @@ public:
 
     void insertItem(Position p, Item *item);
     void deleteItem(Position p);
+
+    bool isEmpty(Position p);
     void getIterator(Position p);
     //friend ofstream &operator<<(ofstream &stream, const CollectionContainer &cc);
 
