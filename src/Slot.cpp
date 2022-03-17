@@ -114,5 +114,5 @@ int Slot::get_occupied(){
 }
 
 ofstream& operator<<(ofstream& stream, const Slot& slot){
-
+    return stream;
 }

@@ -64,6 +64,8 @@ CollectionContainer &CollectionContainer::operator=(CollectionContainer &cc)
         }
         container.push_back(s);
     }
+
+    return *this;
 }
 
 void CollectionContainer::insertItem(Position p, Item *item, int count=1)

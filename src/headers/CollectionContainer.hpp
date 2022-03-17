@@ -30,7 +30,7 @@ public:
     // operator
     CollectionContainer &operator=(CollectionContainer &cc);
 
-    void insertItem(Position p, Item *item, int count=1);
+    void insertItem(Position p, Item *item, int count);
     void deleteItem(Position p, int count=1);
 
     bool isEmpty(Position p);
