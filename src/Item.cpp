@@ -22,11 +22,11 @@ int Item::getMaxStack() {
 	return this->mxStack;
 }
 
-string NonToolItem::getName() : public Item(){
+string NonToolItem::getName(){
 	return this->name;
 }
 
-string ToolItem::getName() : public Item(){
+string ToolItem::getName(){
 	return this->name;
 }
 
