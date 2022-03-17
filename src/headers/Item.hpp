@@ -21,14 +21,14 @@ class Item{
 
 };
 
-class ToolItem: public Item{
+class NonToolItem: public Item{
     private:
 
     public:
         string getName();
 };
 
-class NonToolItem: public Item{
+class ToolItem: public Item{
     private:
         int health; //10-damage
     public:
