@@ -16,6 +16,7 @@ bool Item::operator!=(const Item& other) {
 Item& Item::operator=(const Item& other){
 	this->name = other.name;
 	this->mxStack = other.mxStack;
+	return *this;
 }
 
 int Item::getMaxStack() {

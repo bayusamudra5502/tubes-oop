@@ -18,8 +18,8 @@ class Slot{
 
         bool empty();
         bool full();
-        void insert(Item* item, int count=1); 
-        void remove(int count=1);
+        void insert(Item* item, int count); 
+        void remove(int count);
 
         int get_id();
         Item* get_contents();

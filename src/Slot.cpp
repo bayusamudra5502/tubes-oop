@@ -40,12 +40,12 @@ Slot::Slot(const Slot& other){
 }
 
 Slot::~Slot(){
-    delete this->contents;
+    delete [] this->contents;
 }
 
 Slot& Slot::operator=(Slot& other){
     this->id = other.id;
-    delete this->contents;
+    delete [] this->contents;
     this->contents = other.contents;
     this->available_slot = other.available_slot;
     return *this;
