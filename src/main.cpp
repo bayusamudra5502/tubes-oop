@@ -1,7 +1,6 @@
 // sample main file, replace this with your own code
 #include <filesystem>
 #include <fstream>
-#include <halo.hpp>
 #include <iostream>
 #include <string>
 
@@ -55,8 +54,6 @@ int main() {
       // need to handle multiple destinations
       cin >> slotSrc >> slotQty >> slotDest;
       cout << "TODO" << endl;
-    } else if (command == "HALO") {
-      printHalo();
     } else {
       // todo
       cout << "Invalid command" << endl;

@@ -1,39 +1,32 @@
 #include <Item.hpp>
 
 Item::Item(const Item& other) {
-	this -> name = other.name;
-	this -> mxStack = other.mxStack;
+  this->name = other.name;
+  this->mxStack = other.mxStack;
 }
 
-bool Item::operator==(const Item& other) {
-	return (this->name == other.name);
+bool Item::operator==(const Item& other) { return (this->name == other.name); }
+
+bool Item::operator<(const Item& other) { return (this->name < other.name); }
+
+bool Item::operator>(const Item& other) { return (this->name > other.name); }
+
+bool Item::operator!=(const Item& other) { return (this->name != other.name); }
+
+Item& Item::operator=(const Item& other) {
+  this->name = other.name;
+  this->mxStack = other.mxStack;
+  return *this;
 }
 
-bool Item::operator!=(const Item& other) {
-	return (this->name != other.name);
-}
+int Item::getMaxStack() { return this->mxStack; }
 
-Item& Item::operator=(const Item& other){
-	this->name = other.name;
-	this->mxStack = other.mxStack;
-	return *this;
-}
+string NonToolItem::getName() { return this->name; }
 
-int Item::getMaxStack() {
-	return this->mxStack;
-}
+string ToolItem::getName() { return this->name; }
 
-string NonToolItem::getName(){
-	return this->name;
-}
-
-string ToolItem::getName(){
-	return this->name;
-}
-
-void ToolItem::useItem(){
-	this-> health--;
-	if (this-> health == 0) {
-		
-	}
+void ToolItem::useItem() {
+  this->health--;
+  if (this->health == 0) {
+  }
 }
