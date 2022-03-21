@@ -1,40 +1,34 @@
 #pragma once
 #include <Slot.hpp>
 
-
 struct Position {
-    int row,col;
+  int row, col;
 };
 
-class CollectionContainer
-{
+class CollectionContainer {
+ private:
+  vector<vector<Slot>> container;
+  int mxRow;  // banyak baris
+  int mxCol;  // banyak kolom
 
-private:
+ public:
+  // constructor
+  CollectionContainer();
+  CollectionContainer(int mxRow, int mxCol);
 
-    vector<vector<Slot>> container;
-    int mxRow; // banyak baris
-    int mxCol; // banyak kolom
+  // copy constructor
+  CollectionContainer(const CollectionContainer &cc);
 
-public:
+  // destructor
+  ~CollectionContainer();
 
-    // constructor
-    CollectionContainer();
-    CollectionContainer(int mxRow, int mxCol);
+  // operator
+  CollectionContainer &operator=(CollectionContainer &cc);
 
-    // copy constructor
-    CollectionContainer(const CollectionContainer &cc);
+  void insertItem(Position p, Item *item, int count);
+  void deleteItem(Position p, int count = 1);
 
-    // destructor
-    ~CollectionContainer();
-
-    // operator
-    CollectionContainer &operator=(CollectionContainer &cc);
-
-    void insertItem(Position p, Item *item, int count);
-    void deleteItem(Position p, int count=1);
-
-    bool isEmpty(Position p);
-    void getIterator(Position p);
-    friend ofstream &operator<<(ofstream &stream, const CollectionContainer &cc);
-
+  bool isEmpty(Position p);
+  void getIterator(Position p);
+  friend ofstream &operator<<(ofstream &stream, const CollectionContainer &cc);
 };

@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "BuildTest",
+      "command": "make",
+      "args": ["unit-test-build"],
+      "type": "shell"
+    },
+    {
+      "label": "BuildProgram",
+      "command": "make",
+      "args": ["compile"],
+      "type": "shell"
+    }
+  ]
+}

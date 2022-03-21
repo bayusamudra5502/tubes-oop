@@ -30,9 +30,11 @@ test-io: tests/engine/check.cpp ./bin/main
 
 e2e: build-actual test-io
 
-unit-test:	$(ALL_UNIT_TEST) $(SRCS_NO_MAIN)
+unit-test-build: $(SRCS_NO_MAIN) $(ALL_UNIT_TEST)
 	@mkdir -p bin
 	@g++ -g -I"./src/headers" -std=c++17 -Wall -o ./bin/test $^ -lgtest -pthread
+
+unit-test: unit-test-build
 	@./bin/test
 
 install:
@@ -50,4 +52,4 @@ run:
 
 build: compile
 
-.PHONY: check e2e build-actual test-io clean test build
+.PHONY: check e2e build-actual test-io clean test build unit-test
