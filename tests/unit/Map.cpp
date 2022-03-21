@@ -55,3 +55,40 @@ TEST(MAP_TEST, MAP_ISI_NOT_FOUND) {
   ASSERT_THROW(m[20], BaseException*);
   ASSERT_THROW(m[20], KeyNotFound<int>*);
 }
+
+TEST(MAP_TEST, MAP_CHANGE) {
+  Map<int, int> m;
+  m.insertItem(1, 20);
+  m.insertItem(10, 90);
+  m.insertItem(100, 20);
+
+  m[1] = 30;
+  m[10] = 50;
+
+  ASSERT_EQ(m[1], 30);
+  ASSERT_EQ(m[10], 50);
+  ASSERT_EQ(m[100], 20);
+}
+
+TEST(MAP_TEST, GET_ITEM) {
+  Map<int, int> m;
+  m.insertItem(1, 20);
+  m.insertItem(10, 90);
+  m.insertItem(100, 20);
+
+  ASSERT_EQ(m.getItem(1), 20);
+  ASSERT_EQ(m.getItem(10), 90);
+  ASSERT_EQ(m.getItem(100), 20);
+}
+
+TEST(MAP_TEST, DELETE_ITEM) {
+  Map<int, int> m;
+  m.insertItem(1, 20);
+  m.insertItem(10, 90);
+  m.insertItem(100, 20);
+
+  ASSERT_TRUE(m.isKeyExist(10));
+  m.deleteItem(10);
+
+  ASSERT_FALSE(m.isKeyExist(10));
+}

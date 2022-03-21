@@ -33,7 +33,7 @@ U& Map<T, U>::operator[](T key) {
 
 template <class T, class U>
 U Map<T, U>::getItem(T key) {
-  return *this[key];
+  return (*this)[key];
 }
 
 template <class T, class U>

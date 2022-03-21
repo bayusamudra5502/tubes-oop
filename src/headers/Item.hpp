@@ -5,6 +5,7 @@ const int MXNONTOOL = 64;
 const int MXTOOL = 1;
 const string TOOLNAME = "TOOL";
 const string NONTOOLNAME = "NONTOOL";
+
 class Item {
  protected:
   string name;
