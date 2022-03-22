@@ -45,6 +45,14 @@ Item& Item::operator=(const Item& other) {
 
 int Item::getMaxStack() const { return this->mxStack; }
 
+int Item::getItemId() const {
+    return this->itemId;
+}
+
+ItemType Item::getType() const {
+    return this -> type;
+}
+
 string Item::getName() const { return this->name; }
 
 NonToolItem::NonToolItem() : Item() { this->category = ""; }
