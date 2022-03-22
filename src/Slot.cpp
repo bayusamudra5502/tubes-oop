@@ -95,5 +95,5 @@ int Slot::get_occupied() { return this->occupied; }
 
 ofstream& operator<<(ofstream& stream, const Slot& slot) { return stream; }
 
-bool Slot::operator==(const Slot& other) {}
-bool Slot::operator!=(const Slot& other) {}
+bool Slot::operator==(const Slot& other) { return true; }
+bool Slot::operator!=(const Slot& other) { return true; }
