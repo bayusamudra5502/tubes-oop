@@ -24,6 +24,8 @@ class Item {
   virtual Item& operator=(const Item& other);
   string getName() const;
   int getMaxStack() const;
+  int getItemId() const;
+  ItemType getType() const;
 };
 
 class NonToolItem : public Item {
