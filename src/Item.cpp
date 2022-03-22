@@ -1,32 +1,54 @@
 #include <Item.hpp>
 
 Item::Item(const Item& other) {
-  this->name = other.name;
+  this->metadata = other.metadata;
   this->mxStack = other.mxStack;
 }
 
-bool Item::operator==(const Item& other) { return (this->name == other.name); }
+Item::Item() {}
 
-bool Item::operator<(const Item& other) { return (this->name < other.name); }
+Item::Item(const ItemMetadata& data) {
+  this->metadata = data;
 
-bool Item::operator>(const Item& other) { return (this->name > other.name); }
+  if (data.type == NONTOOLS) {
+    this->mxStack = 1;
+  } else {
+    this->mxStack = 64;
+  }
+}
 
-bool Item::operator!=(const Item& other) { return (this->name != other.name); }
+bool Item::operator==(const Item& other) {
+  return (this->metadata.itemId == other.metadata.itemId);
+}
+
+bool Item::operator<(const Item& other) {
+  return (this->metadata.itemId < other.metadata.itemId);
+}
+
+bool Item::operator>(const Item& other) {
+  return (this->metadata.itemId > other.metadata.itemId);
+}
+
+bool Item::operator!=(const Item& other) {
+  return (this->metadata.itemId != other.metadata.itemId);
+}
 
 Item& Item::operator=(const Item& other) {
-  this->name = other.name;
+  this->metadata = metadata;
   this->mxStack = other.mxStack;
   return *this;
 }
 
-int Item::getMaxStack() { return this->mxStack; }
+int Item::getMaxStack() const { return this->mxStack; }
 
-string NonToolItem::getName() { return this->name; }
+string Item::getName() const { return this->metadata.name; }
 
-string ToolItem::getName() { return this->name; }
+string NonToolItem::getCategory() const { return this->metadata.category; }
 
 void ToolItem::useItem() {
-  this->health--;
-  if (this->health == 0) {
+  if (this->health > 0) {
+    this->health--;
   }
 }
+
+void ToolItem::setHealth(int newHealth) { this->health = newHealth; }

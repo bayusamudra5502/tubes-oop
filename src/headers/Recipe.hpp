@@ -6,11 +6,7 @@
 
 using namespace std;
 
-class Recipe {
- private:
-  const CollectionContainer cc;
-  int row, col;
-
+class Recipe : private CollectionContainer {
  public:
   Recipe();
   Recipe(int row, int col, Item* item);

@@ -63,7 +63,7 @@ void Slot::insert(Item* item, int count = 1) {
       this->occupied = count;
     }
   } else {
-    if (this->contents->getName() == TOOLNAME) {
+    if (this->contents->getName() == "") {
       // throw exception
     } else if (this->available_slot < count) {
       // throw exception
