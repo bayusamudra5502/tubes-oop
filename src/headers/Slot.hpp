@@ -16,6 +16,9 @@ class Slot {
   Slot(const Slot& other);
   ~Slot();
   Slot& operator=(Slot& other);
+  bool operator==(const Slot& other);
+  bool operator!=(const Slot& other);
+
 
   bool empty() const;
   bool full() const;
