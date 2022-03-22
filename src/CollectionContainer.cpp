@@ -57,6 +57,26 @@ CollectionContainer &CollectionContainer::operator=(CollectionContainer &cc) {
   return *this;
 }
 
+bool CollectionContainer::operator==(CollectionContainer &cc) {
+  bool output = true;
+  if (this->mxCol == cc.mxCol && this->mxRow == cc.mxRow) {
+    int i = 0;
+    while(i < this->mxRow && output) {
+      int j = 0;
+      while(j < this->mxCol && output) {
+        if(this->container[i][j].operator!=(cc.container[i][j])) {
+          output = false;
+        } else {
+          j++;
+        }
+      }
+      i++;
+    }
+  } else {
+    output = false;
+  }
+  return output;
+}
 void CollectionContainer::insertItem(Position p, Item &item, int count = 1) {
   if (this->container[p.row][p.col].full()) {
     // exception
