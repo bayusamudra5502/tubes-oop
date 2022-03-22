@@ -77,6 +77,11 @@ bool CollectionContainer::operator==(CollectionContainer &cc) {
   }
   return output;
 }
+
+Slot CollectionContainer::operator[](const Position &pos) {
+  return this->container[pos.row][pos.col];
+}
+
 void CollectionContainer::insertItem(Position p, Item &item, int count = 1) {
   if (this->container[p.row][p.col].full()) {
     // exception
