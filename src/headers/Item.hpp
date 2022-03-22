@@ -8,31 +8,45 @@ const int MXNONTOOL = 64;
 const int MXTOOL = 1;
 class Item {
  protected:
-  ItemMetadata metadata;
   int mxStack;  // banyaknya item maksimal perslot
+  int itemId;
+  string name;
+  ItemType type;
+
  public:
   Item();
-  Item(const ItemMetadata& item);
   Item(const Item& other);
+  Item(int itemId, string name, ItemType type, int maxStack);
   bool operator==(const Item& other);
   bool operator>(const Item& other);
   bool operator<(const Item& other);
   bool operator!=(const Item& other);
-  Item& operator=(const Item& other);
+  virtual Item& operator=(const Item& other);
   string getName() const;
   int getMaxStack() const;
 };
 
 class NonToolItem : public Item {
  private:
+  string category;
+
  public:
+  NonToolItem();
+  NonToolItem(const NonToolItem& copy);
+  NonToolItem(int itemId, string name, string category, int maxStack);
+  NonToolItem& operator=(const NonToolItem& other);
   string getCategory() const;
 };
 
 class ToolItem : public Item {
- private:
-  int health;  // 10-damage
+  int health;
+
  public:
+  ToolItem();
+  ToolItem(const ToolItem& copy);
+  ToolItem(int itemId, string name);
+  ToolItem& operator=(const ToolItem& other);
+
   void useItem();
   void setHealth(int newHealth);
 };

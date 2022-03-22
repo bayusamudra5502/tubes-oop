@@ -1,49 +1,84 @@
 #include <Item.hpp>
 
 Item::Item(const Item& other) {
-  this->metadata = other.metadata;
   this->mxStack = other.mxStack;
+  this->itemId = other.itemId;
+  this->name = other.name;
+  this->type = other.type;
 }
 
-Item::Item() {}
+Item::Item() {
+  this->mxStack = 0;
+  this->itemId = -1;
+}
 
-Item::Item(const ItemMetadata& data) {
-  this->metadata = data;
-
-  if (data.type == NONTOOLS) {
-    this->mxStack = 1;
-  } else {
-    this->mxStack = 64;
-  }
+Item::Item(int itemId, string name, ItemType type, int maxStack) {
+  this->mxStack = maxStack;
+  this->itemId = itemId;
+  this->name = name;
+  this->type = type;
 }
 
 bool Item::operator==(const Item& other) {
-  return (this->metadata.itemId == other.metadata.itemId);
+  return (this->itemId == other.itemId);
 }
 
 bool Item::operator<(const Item& other) {
-  return (this->metadata.itemId < other.metadata.itemId);
+  return (this->itemId < other.itemId);
 }
 
 bool Item::operator>(const Item& other) {
-  return (this->metadata.itemId > other.metadata.itemId);
+  return (this->itemId > other.itemId);
 }
 
 bool Item::operator!=(const Item& other) {
-  return (this->metadata.itemId != other.metadata.itemId);
+  return (this->itemId != other.itemId);
 }
 
 Item& Item::operator=(const Item& other) {
-  this->metadata = metadata;
   this->mxStack = other.mxStack;
+  this->itemId = other.itemId;
+  this->name = other.name;
+  this->type = other.type;
   return *this;
 }
 
 int Item::getMaxStack() const { return this->mxStack; }
 
-string Item::getName() const { return this->metadata.name; }
+string Item::getName() const { return this->name; }
 
-string NonToolItem::getCategory() const { return this->metadata.category; }
+NonToolItem::NonToolItem() : Item() { this->category = ""; }
+
+NonToolItem::NonToolItem(const NonToolItem& copy) : Item(copy) {}
+
+NonToolItem::NonToolItem(int itemId, string name, string category, int maxStack)
+    : Item(itemId, name, NONTOOLS, maxStack) {
+  this->category = category;
+}
+
+string NonToolItem::getCategory() const { return this->category; }
+
+NonToolItem& NonToolItem::operator=(const NonToolItem& other) {
+  Item::operator=(other);
+  this->category = other.category;
+
+  return *this;
+}
+
+ToolItem& ToolItem::operator=(const ToolItem& other) {
+  Item::operator=(other);
+  this->health = health;
+
+  return *this;
+}
+
+ToolItem::ToolItem() : Item() { this->health = 10; }
+
+ToolItem::ToolItem(const ToolItem& copy) : Item(copy) {}
+
+ToolItem::ToolItem(int itemId, string name) : Item(itemId, name, TOOLS, 1) {
+  this->health = 10;
+}
 
 void ToolItem::useItem() {
   if (this->health > 0) {

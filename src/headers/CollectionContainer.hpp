@@ -6,7 +6,7 @@ struct Position {
 };
 
 class CollectionContainer {
- private:
+ protected:
   vector<vector<Slot>> container;
   int mxRow;  // banyak baris
   int mxCol;  // banyak kolom
