@@ -26,6 +26,7 @@ class CollectionContainer {
   CollectionContainer &operator=(CollectionContainer &cc);
 
   bool operator==(CollectionContainer &cc);
+  Slot operator[](const Position &pos);
 
   void insertItem(Position p, Item &item, int count);
   void deleteItem(Position p, int count = 1);
