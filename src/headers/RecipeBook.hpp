@@ -14,5 +14,5 @@ class RecipeBook {
 
  public:
   void insert(const Recipe& r);
-  Slot find(const CraftingTable& ct);
+  Slot find(const CraftingTable& ct) const;
 };
