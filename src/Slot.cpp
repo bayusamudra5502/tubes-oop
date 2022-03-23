@@ -38,8 +38,8 @@ Slot::Slot(const Slot& other) {
   this->available_slot = other.available_slot;
 }
 
-Slot::~Slot() { 
-  delete contents; 
+Slot::~Slot() {
+  // delete contents;
 }
 
 Slot& Slot::operator=(Slot& other) {
@@ -95,18 +95,18 @@ int Slot::get_available_slot() { return this->available_slot; }
 
 int Slot::get_occupied() { return this->occupied; }
 
-void Slot::print(ostream& stream, int mxLen) { 
+void Slot::print(ostream& stream, int mxLen) {
   this->contents->print(stream, mxLen);
   stream << " ";
-  if(this->get_occupied()<10){
+  if (this->get_occupied() < 10) {
     stream << " ";
   }
   stream << "(" << this->get_occupied() << ")";
 }
 
-bool Slot::operator==(const Slot& other) { 
-  return *this->contents == *other.contents; 
+bool Slot::operator==(const Slot& other) {
+  return *this->contents == *other.contents;
 }
-bool Slot::operator!=(const Slot& other) { 
-  return *this->contents == *other.contents; 
+bool Slot::operator!=(const Slot& other) {
+  return *this->contents == *other.contents;
 }

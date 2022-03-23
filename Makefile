@@ -52,4 +52,4 @@ run:
 
 build: compile
 
-.PHONY: check e2e build-actual test-io clean test build unit-test
+.PHONY: check e2e build-actual test-io clean test build unit-test ./bin/main
