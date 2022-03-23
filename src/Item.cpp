@@ -1,12 +1,5 @@
 #include <Item.hpp>
 
-Item::Item(const Item& other) {
-  this->mxStack = other.mxStack;
-  this->itemId = other.itemId;
-  this->name = other.name;
-  this->type = other.type;
-}
-
 Item::Item() {
   this->mxStack = 0;
   this->itemId = -1;
@@ -17,6 +10,13 @@ Item::Item(int itemId, string name, ItemType type, int maxStack) {
   this->itemId = itemId;
   this->name = name;
   this->type = type;
+}
+
+Item::Item(const Item& other) {
+  this->mxStack = other.mxStack;
+  this->itemId = other.itemId;
+  this->name = other.name;
+  this->type = other.type;
 }
 
 bool Item::operator==(const Item& other) {
@@ -43,7 +43,9 @@ Item& Item::operator=(const Item& other) {
   return *this;
 }
 
-int Item::getMaxStack() const { return this->mxStack; }
+int Item::getMaxStack() const { 
+    return this->mxStack; 
+}
 
 int Item::getItemId() const {
     return this->itemId;
@@ -53,9 +55,13 @@ ItemType Item::getType() const {
     return this -> type;
 }
 
-string Item::getName() const { return this->name; }
+string Item::getName() const { 
+    return this->name; 
+}
 
-NonToolItem::NonToolItem() : Item() { this->category = ""; }
+NonToolItem::NonToolItem() : Item() { 
+    this->category = ""; 
+}
 
 NonToolItem::NonToolItem(const NonToolItem& copy) : Item(copy) {}
 
@@ -69,18 +75,18 @@ string NonToolItem::getCategory() const { return this->category; }
 NonToolItem& NonToolItem::operator=(const NonToolItem& other) {
   Item::operator=(other);
   this->category = other.category;
-
   return *this;
 }
 
 ToolItem& ToolItem::operator=(const ToolItem& other) {
   Item::operator=(other);
   this->health = health;
-
   return *this;
 }
 
-ToolItem::ToolItem() : Item() { this->health = 10; }
+ToolItem::ToolItem() : Item() { 
+    this->health = 10; 
+}
 
 ToolItem::ToolItem(const ToolItem& copy) : Item(copy) {}
 

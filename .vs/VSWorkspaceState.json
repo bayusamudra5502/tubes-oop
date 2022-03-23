@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\headers"
   ],
-  "SelectedNode": "\\C:\\tubes-oop",
+  "SelectedNode": "\\src\\Item.cpp",
   "PreviewInSolutionExplorer": false
 }

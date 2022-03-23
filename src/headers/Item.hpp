@@ -4,8 +4,10 @@
 #include <ItemMetadata.hpp>
 
 using namespace std;
+
 const int MXNONTOOL = 64;
 const int MXTOOL = 1;
+
 class Item {
  protected:
   int mxStack;  // banyaknya item maksimal perslot
@@ -41,7 +43,7 @@ class NonToolItem : public Item {
 };
 
 class ToolItem : public Item {
-  int health;
+  int health; //bernilai awal 10, akan dikurangi 1 per penggunaan toolitem
 
  public:
   ToolItem();
