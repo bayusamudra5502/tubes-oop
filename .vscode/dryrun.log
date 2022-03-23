@@ -1,4 +1,13 @@
-make.exe --dry-run --always-make --keep-going --print-directory
-'make.exe' is not recognized as an internal or external command,
-operable program or batch file.
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/firizky29/TubesOOP/tubes-oop'
+mkdir -p bin
+g++ -std=c++17 -I"./src/headers" -Wall -O3 -o bin/main src/CraftingTable.cpp src/Item.cpp src/CollectionContainer.cpp src/RecipeBook.cpp src/Slot.cpp src/RecipeEquality.cpp src/Recipe.cpp src/exception/BaseException.cpp src/main.cpp
+mkdir -p tests/outputs
+for inputfile in tests/test_case/*.in; do \
+	./bin/main < $inputfile; \
+done;
+mkdir -p bin
+g++ -g -std=c++17 -Wall -o ./bin/checker tests/engine/check.cpp
+./bin/checker
+make: Leaving directory '/home/firizky29/TubesOOP/tubes-oop'
  

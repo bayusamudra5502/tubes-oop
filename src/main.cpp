@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <CollectionContainer.hpp>
 
 using namespace std;
 
@@ -52,7 +53,10 @@ int main() {
       int slotQty;
       string slotDest;
       // need to handle multiple destinations
-      cin >> slotSrc >> slotQty >> slotDest;
+      //cin >> slotSrc >> slotQty >> slotDest;
+      CollectionContainer cc(3, 3);
+      cc.insertItem({0, 0}, new ToolItem(0, "HADUHAY"), 10);
+      cout << cc;
       cout << "TODO" << endl;
     } else {
       // todo

@@ -30,5 +30,5 @@ class Slot {
   int get_available_slot();
   int get_occupied();
 
-  friend ofstream& operator<<(ofstream& stream, const Slot& slot);
+  void print(ostream& stream, int mxLen);
 };

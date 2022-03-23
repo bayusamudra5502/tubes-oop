@@ -11,7 +11,7 @@ CollectionContainer::CollectionContainer(int mxRow, int mxCol) {
   for (int i = 0; i < this->mxRow; i++) {
     vector<Slot> s;
     for (int j = 0; j < this->mxCol; j++) {
-      s.push_back(Slot(i * mxCol + j + 1));
+      s.push_back(Slot(i * mxCol + j));
     }
     container.push_back(s);
   }
@@ -82,17 +82,17 @@ Slot &CollectionContainer::operator[](const Position &pos) {
   return this->container[pos.row][pos.col];
 }
 
-void CollectionContainer::insertItem(Position p, Item &item, int count = 1) {
+void CollectionContainer::insertItem(Position p, Item* item, int count = 1) {
   if (this->container[p.row][p.col].full()) {
     // exception
   } else if (this->container[p.row][p.col].empty()) {
-    this->container[p.row][p.col].insert(&item, count);
+    this->container[p.row][p.col].insert(item, count);
   } else {
     if (this->container[p.row][p.col].get_contents()->getName() !=
-        item.getName()) {
+        item->getName()) {
       // exception, nama tidak sama
     } else {
-      this->container[p.row][p.col].insert(&item, count);
+      this->container[p.row][p.col].insert(item, count);
     }
   }
 }
@@ -109,11 +109,19 @@ bool CollectionContainer::isEmpty(Position p) const {
   return this->container[p.row][p.col].empty();
 }
 
-ofstream &operator<<(ofstream &stream, const CollectionContainer &cc) {
+ostream &operator<<(ostream &stream, const CollectionContainer &cc) {
   for (auto p : cc.container) {
+    int mx = -1;
     for (auto q : p) {
-      stream << q;
+      mx = max(mx, q.get_contents()->getNameLength());
     }
+    for(auto q: p){
+      stream << "[I0 ";
+      q.get_contents()->print(stream, mx);
+      stream << "] ";
+    }
+    stream << "\n";
   }
+
   return stream;
 }

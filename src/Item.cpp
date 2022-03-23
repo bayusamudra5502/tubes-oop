@@ -1,7 +1,9 @@
 #include <Item.hpp>
 
 Item::Item() {
-  this->mxStack = 0;
+  this->name = "KOSONG";
+  this->type = NULLITEM;
+  this->mxStack = MXNULL;
   this->itemId = -1;
 }
 
@@ -17,6 +19,14 @@ Item::Item(const Item& other) {
   this->itemId = other.itemId;
   this->name = other.name;
   this->type = other.type;
+}
+
+Item::~Item(){
+
+}
+
+bool Item::isEmpty(){
+  return this->type == NULLITEM;
 }
 
 bool Item::operator==(const Item& other) {
@@ -51,6 +61,7 @@ int Item::getItemId() const {
     return this->itemId;
 }
 
+
 ItemType Item::getType() const {
     return this -> type;
 }
@@ -60,14 +71,18 @@ string Item::getName() const {
 }
 
 NonToolItem::NonToolItem() : Item() { 
-    this->category = ""; 
+    this->category = "NULL"; 
 }
 
 NonToolItem::NonToolItem(const NonToolItem& copy) : Item(copy) {}
 
-NonToolItem::NonToolItem(int itemId, string name, string category, int maxStack)
-    : Item(itemId, name, NONTOOLS, maxStack) {
+NonToolItem::NonToolItem(int itemId, string name, string category)
+    : Item(itemId, name, NONTOOLS, MXNONTOOL) {
   this->category = category;
+}
+
+NonToolItem::~NonToolItem(){
+
 }
 
 string NonToolItem::getCategory() const { return this->category; }
@@ -78,11 +93,25 @@ NonToolItem& NonToolItem::operator=(const NonToolItem& other) {
   return *this;
 }
 
+int Item::getNameLength(){
+  return this->getName().size();
+}
+
+void Item::print(ostream& s, int mxLength){
+  s << this->name;
+  for(int i=this->getNameLength(); i<mxLength; i++){
+    s << " ";
+  }
+}
+
+
+
 ToolItem& ToolItem::operator=(const ToolItem& other) {
   Item::operator=(other);
   this->health = health;
   return *this;
 }
+
 
 ToolItem::ToolItem() : Item() { 
     this->health = 10; 
@@ -90,8 +119,12 @@ ToolItem::ToolItem() : Item() {
 
 ToolItem::ToolItem(const ToolItem& copy) : Item(copy) {}
 
-ToolItem::ToolItem(int itemId, string name) : Item(itemId, name, TOOLS, 1) {
+ToolItem::ToolItem(int itemId, string name) : Item(itemId, name, TOOLS, MXTOOL) {
   this->health = 10;
+}
+
+ToolItem::~ToolItem(){
+  
 }
 
 void ToolItem::useItem() {
@@ -100,4 +133,27 @@ void ToolItem::useItem() {
   }
 }
 
+int ToolItem::getHealth() const{
+  return this->health;
+}
+
 void ToolItem::setHealth(int newHealth) { this->health = newHealth; }
+
+int ToolItem::getNameLength(){
+  int cnt = 0;
+  if(this->getHealth()<10){
+    cnt=1;
+  }
+  else{
+    cnt=2;
+  }
+  cnt += this->getName().size() + 3;
+  return cnt;
+}
+
+void ToolItem::print(ostream& s, int mxLength){
+  s << this->name << " (" << this->getHealth() << ")";
+  for(int i=this->getNameLength(); i<mxLength; i++){
+    s << " ";
+  }
+}

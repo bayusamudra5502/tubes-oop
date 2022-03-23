@@ -10,7 +10,7 @@ Recipe::Recipe(int row, int col, vector<Slot> item, Slot result)
       Position pos = {i, j};
       Slot content = item[i * col + j];
 
-      this->insertItem(pos, *content.get_contents(), content.get_occupied());
+      this->insertItem(pos, content.get_contents(), content.get_occupied());
     }
   }
 

@@ -7,6 +7,7 @@ using namespace std;
 
 const int MXNONTOOL = 64;
 const int MXTOOL = 1;
+const int MXNULL = -1;
 
 class Item {
  protected:
@@ -24,10 +25,14 @@ class Item {
   bool operator<(const Item& other);
   bool operator!=(const Item& other);
   virtual Item& operator=(const Item& other);
+  virtual ~Item();
   string getName() const;
   int getMaxStack() const;
   int getItemId() const;
+  bool isEmpty();
+  virtual int getNameLength();
   ItemType getType() const;
+  virtual void print(ostream&, int);
 };
 
 class NonToolItem : public Item {
@@ -37,7 +42,8 @@ class NonToolItem : public Item {
  public:
   NonToolItem();
   NonToolItem(const NonToolItem& copy);
-  NonToolItem(int itemId, string name, string category, int maxStack);
+  NonToolItem(int itemId, string name, string category);
+  virtual ~NonToolItem();
   NonToolItem& operator=(const NonToolItem& other);
   string getCategory() const;
 };
@@ -49,8 +55,11 @@ class ToolItem : public Item {
   ToolItem();
   ToolItem(const ToolItem& copy);
   ToolItem(int itemId, string name);
+  virtual ~ToolItem();
   ToolItem& operator=(const ToolItem& other);
-
+  int getNameLength();
+  int getHealth() const;
   void useItem();
   void setHealth(int newHealth);
+  void print(ostream&, int) ;
 };

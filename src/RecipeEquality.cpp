@@ -10,7 +10,7 @@ bool operator==(const CraftingTable& ct, const Recipe& r) {
         for (int l = 0; l < r.mxCol; l++) {
           Position pos = {k + i, l + j};
           Slot content = r.container[k][l];
-          ctNew.insertItem(pos, *content.get_contents(),
+          ctNew.insertItem(pos, content.get_contents(),
                            content.get_occupied());
         }
       }
@@ -30,7 +30,7 @@ bool operator==(const CraftingTable& ct, const Recipe& r) {
         for (int l = 0; l < r.mxCol; l++) {
           Position pos = {k + i, l + j};
           Slot content = r.container[k][r.mxCol - l];
-          ctNew.insertItem(pos, *content.get_contents(),
+          ctNew.insertItem(pos, content.get_contents(),
                            content.get_occupied());
         }
       }
