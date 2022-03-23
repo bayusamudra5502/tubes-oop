@@ -31,6 +31,7 @@ class Item {
   int getItemId() const;
   bool isEmpty();
   virtual int getNameLength();
+  virtual Item* clone();
   ItemType getType() const;
   virtual void print(ostream&, int);
 };
@@ -44,6 +45,7 @@ class NonToolItem : public Item {
   NonToolItem(const NonToolItem& copy);
   NonToolItem(int itemId, string name, string category);
   virtual ~NonToolItem();
+  virtual Item* clone();
   NonToolItem& operator=(const NonToolItem& other);
   string getCategory() const;
 };
@@ -56,6 +58,7 @@ class ToolItem : public Item {
   ToolItem(const ToolItem& copy);
   ToolItem(int itemId, string name);
   virtual ~ToolItem();
+  virtual Item* clone();
   ToolItem& operator=(const ToolItem& other);
   int getNameLength();
   int getHealth() const;

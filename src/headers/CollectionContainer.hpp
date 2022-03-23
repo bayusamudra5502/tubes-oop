@@ -26,12 +26,13 @@ class CollectionContainer {
   CollectionContainer &operator=(CollectionContainer &cc);
 
   bool operator==(CollectionContainer &cc);
-  Slot &operator[](const Position &pos);
+  Slot operator[](const Position &pos) const;
 
-  void insertItem(Position p, Item* item, int count);
+  void insertItem(Position p, Item* item, int count = 1);
   void deleteItem(Position p, int count = 1);
 
   bool isEmpty(Position p) const;
+
 
   friend ostream &operator<<(ostream &stream, const CollectionContainer &cc);
 };

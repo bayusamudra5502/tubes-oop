@@ -34,17 +34,16 @@ Slot::Slot(int id, Item* item, int used) {
 
 Slot::Slot(const Slot& other) {
   this->id = other.id;
-  // Item(int itemId, string name, ItemType type, int maxStack);
-  Item* item = new Item(*other.contents);
-  this->contents = item;
+  this->contents = other.contents->clone();
   this->available_slot = other.available_slot;
+  this->occupied = other.occupied;
 }
 
 Slot::~Slot() { delete contents; }
 
 Slot& Slot::operator=(Slot& other) {
   this->id = other.id;
-  // delete[] this->contents;
+  delete this->contents;
   this->contents = other.contents;
   this->available_slot = other.available_slot;
   return *this;
@@ -63,6 +62,7 @@ void Slot::insert(Item* item, int count = 1) {
       this->contents = item;
       this->available_slot = item->getMaxStack() - count;
       this->occupied = count;
+      
     }
   } else {
     if (this->contents->getName() == "") {

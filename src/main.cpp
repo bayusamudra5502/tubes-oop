@@ -49,13 +49,13 @@ int main() {
       cin >> itemName >> itemQty;
       cout << "TODO" << endl;
     } else if (command == "MOVE") {
-      string slotSrc;
-      int slotQty;
-      string slotDest;
+      // string slotSrc;
+      // int slotQty;
+      // string slotDest;
       // need to handle multiple destinations
       //cin >> slotSrc >> slotQty >> slotDest;
       CollectionContainer cc(3, 3);
-      cc.insertItem({0, 0}, new ToolItem(0, "HADUHAY"), 10);
+      cc.insertItem({0, 0}, new ToolItem(0, "HADUHAY"));
       cout << cc;
       cout << "TODO" << endl;
     } else {

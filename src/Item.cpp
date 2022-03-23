@@ -23,7 +23,13 @@ Item::Item(const Item& other) {
 
 Item::~Item() {}
 
-bool Item::isEmpty() { return this->type == NULLITEM; }
+Item* Item::clone(){
+  return new Item(*this);
+}
+
+bool Item::isEmpty(){
+  return this->type == NULLITEM;
+}
 
 bool Item::operator==(const Item& other) {
   return (this->itemId == other.itemId);
@@ -59,7 +65,9 @@ string Item::getName() const { return this->name; }
 
 NonToolItem::NonToolItem() : Item() { this->category = "NULL"; }
 
-NonToolItem::NonToolItem(const NonToolItem& copy) : Item(copy) {}
+NonToolItem::NonToolItem(const NonToolItem& copy) : Item(copy) {
+  this->category = copy.category;
+}
 
 NonToolItem::NonToolItem(int itemId, string name, string category)
     : Item(itemId, name, NONTOOLS, MXNONTOOL) {
@@ -67,6 +75,10 @@ NonToolItem::NonToolItem(int itemId, string name, string category)
 }
 
 NonToolItem::~NonToolItem() {}
+
+Item* NonToolItem::clone(){
+  return new NonToolItem(*this);
+}
 
 string NonToolItem::getCategory() const { return this->category; }
 
@@ -93,7 +105,9 @@ ToolItem& ToolItem::operator=(const ToolItem& other) {
 
 ToolItem::ToolItem() : Item() { this->health = 10; }
 
-ToolItem::ToolItem(const ToolItem& copy) : Item(copy) {}
+ToolItem::ToolItem(const ToolItem& copy) : Item(copy) {
+  this->health = copy.health;
+}
 
 ToolItem::ToolItem(int itemId, string name)
     : Item(itemId, name, TOOLS, MXTOOL) {
@@ -101,6 +115,10 @@ ToolItem::ToolItem(int itemId, string name)
 }
 
 ToolItem::~ToolItem() {}
+
+Item* ToolItem::clone(){
+  return new ToolItem(*this);
+}
 
 void ToolItem::useItem() {
   if (this->health > 0) {
@@ -119,13 +137,13 @@ int ToolItem::getNameLength() {
   } else {
     cnt = 2;
   }
-  cnt += this->getName().size() + 3;
+  cnt += this->getName().size() + 2;
   return cnt;
 }
 
-void ToolItem::print(ostream& s, int mxLength) {
-  s << this->name << " (" << this->getHealth() << ")";
-  for (int i = this->getNameLength(); i < mxLength; i++) {
+void ToolItem::print(ostream& s, int mxLength){
+  s << this->name << "(" << this->getHealth() << ")";
+  for(int i=this->getNameLength(); i<mxLength; i++){
     s << " ";
   }
 }
