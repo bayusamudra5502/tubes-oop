@@ -61,10 +61,10 @@ bool CollectionContainer::operator==(CollectionContainer &cc) {
   bool output = true;
   if (this->mxCol == cc.mxCol && this->mxRow == cc.mxRow) {
     int i = 0;
-    while(i < this->mxRow && output) {
+    while (i < this->mxRow && output) {
       int j = 0;
-      while(j < this->mxCol && output) {
-        if(this->container[i][j].operator!=(cc.container[i][j])) {
+      while (j < this->mxCol && output) {
+        if (this->container[i][j].operator!=(cc.container[i][j])) {
           output = false;
         } else {
           j++;
@@ -78,7 +78,7 @@ bool CollectionContainer::operator==(CollectionContainer &cc) {
   return output;
 }
 
-Slot CollectionContainer::operator[](const Position &pos) {
+Slot &CollectionContainer::operator[](const Position &pos) {
   return this->container[pos.row][pos.col];
 }
 
