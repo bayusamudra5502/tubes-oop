@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <CollectionContainer.hpp>
+#include <sstream>
 
 using namespace std;
 
@@ -15,7 +16,13 @@ int main() {
   ifstream itemConfigFile(itemConfigPath);
   for (string line; getline(itemConfigFile, line);) {
     cout << line << endl;
-    // do something
+    stringstream ss(line);
+    int id;
+    string name;
+    string category;
+    string type;
+    ss >> id >> name >> category >> type;
+    // TODO pake variabelnya
   }
 
   // read recipes
@@ -23,6 +30,27 @@ int main() {
        filesystem::directory_iterator(configPath + "/recipe")) {
     cout << entry.path() << endl;
     // read from file and do something
+    ifstream recipeConfigFile(entry.path());
+    vector<string> v;
+    for(string line; getline(recipeConfigFile, line);){
+      v.push_back(line);
+      //cout << line << "\n";
+    }
+    int n, m;
+    stringstream ss1(v[0]);
+    ss1 >> n >> m;
+    string itemName[n][m];
+    for(int i=0; i<n; i++){
+      stringstream ss2(v[i+1]);
+      for(int j=0; j<m; j++){
+        ss2 >> itemName[i][j];
+      }
+    }
+    stringstream ss3(v.back());
+    string outItemName;
+    int outQty;
+    ss3 >> outItemName >> outQty;
+    
   }
 
   // sample interaction
