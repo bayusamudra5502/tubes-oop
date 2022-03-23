@@ -14,6 +14,10 @@ all: compile build-actual e2e
 	@mkdir -p bin
 	@g++ -std=c++17 -I"./src/headers" -Wall -O3 -o bin/main $(ALL_SRCS)
 
+main-debugger:
+	@mkdir -p bin
+	@g++ -g -std=c++17 -I"./src/headers" -Wall -o bin/main $(ALL_SRCS)
+
 compile: ./bin/main
 
 build-actual: $(TC_FOLDER)/*.$(EXT_IN) compile
@@ -52,4 +56,4 @@ run:
 
 build: compile
 
-.PHONY: check e2e build-actual test-io clean test build unit-test ./bin/main
+.PHONY: check e2e build-actual test-io clean test build unit-test ./bin/main main-debugger

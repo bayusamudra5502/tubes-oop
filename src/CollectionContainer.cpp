@@ -31,15 +31,7 @@ CollectionContainer::CollectionContainer(const CollectionContainer &cc) {
 }
 
 // destructor
-CollectionContainer::~CollectionContainer() {
-  for (auto &p : this->container) {
-    for (auto q : p) {
-      q.~Slot();
-    }
-    p.clear();
-  }
-  this->container.clear();
-}
+CollectionContainer::~CollectionContainer() {}
 
 // operator
 CollectionContainer &CollectionContainer::operator=(CollectionContainer &cc) {
@@ -82,7 +74,7 @@ Slot &CollectionContainer::operator[](const Position &pos) {
   return this->container[pos.row][pos.col];
 }
 
-void CollectionContainer::insertItem(Position p, Item* item, int count = 1) {
+void CollectionContainer::insertItem(Position p, Item *item, int count = 1) {
   if (this->container[p.row][p.col].full()) {
     // exception
   } else if (this->container[p.row][p.col].empty()) {
@@ -115,7 +107,7 @@ ostream &operator<<(ostream &stream, const CollectionContainer &cc) {
     for (auto q : p) {
       mx = max(mx, q.get_contents()->getNameLength());
     }
-    for(auto q: p){
+    for (auto q : p) {
       stream << "[I0 ";
       q.get_contents()->print(stream, mx);
       stream << "] ";

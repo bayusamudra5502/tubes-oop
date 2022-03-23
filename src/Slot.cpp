@@ -34,17 +34,17 @@ Slot::Slot(int id, Item* item, int used) {
 
 Slot::Slot(const Slot& other) {
   this->id = other.id;
-  this->contents = other.contents;
+  // Item(int itemId, string name, ItemType type, int maxStack);
+  Item* item = new Item(*other.contents);
+  this->contents = item;
   this->available_slot = other.available_slot;
 }
 
-Slot::~Slot() {
-  // delete contents;
-}
+Slot::~Slot() { delete contents; }
 
 Slot& Slot::operator=(Slot& other) {
   this->id = other.id;
-  delete[] this->contents;
+  // delete[] this->contents;
   this->contents = other.contents;
   this->available_slot = other.available_slot;
   return *this;
