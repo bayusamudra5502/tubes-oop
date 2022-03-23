@@ -6,9 +6,15 @@ class BaseException {
  private:
   string errorName;
 
+ protected:
+  void* errorDetail;
+
  public:
   BaseException();
   BaseException(string errorName);
-  string getErrorName();
-  virtual void* detail() = 0;
+  virtual ~BaseException();
+  string getErrorName() const;
+  const void* detail() const;
+
+  virtual ostream& printError(ostream& os) = 0;
 };

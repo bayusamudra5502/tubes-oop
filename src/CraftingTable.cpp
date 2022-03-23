@@ -2,6 +2,9 @@
 
 CraftingTable::CraftingTable() : CollectionContainer(3, 3) {}
 
+CraftingTable::CraftingTable(const CraftingTable& ct)
+    : CollectionContainer(ct) {}
+
 bool CraftingTable::operator==(const CraftingTable& ct) {
   CraftingTable cp(ct);
 
