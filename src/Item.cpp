@@ -25,6 +25,10 @@ Item::~Item(){
 
 }
 
+Item* Item::clone(){
+  return new Item(*this);
+}
+
 bool Item::isEmpty(){
   return this->type == NULLITEM;
 }
@@ -85,6 +89,10 @@ NonToolItem::~NonToolItem(){
 
 }
 
+Item* NonToolItem::clone(){
+  return new NonToolItem(*this);
+}
+
 string NonToolItem::getCategory() const { return this->category; }
 
 NonToolItem& NonToolItem::operator=(const NonToolItem& other) {
@@ -127,6 +135,10 @@ ToolItem::~ToolItem(){
   
 }
 
+Item* ToolItem::clone(){
+  return new ToolItem(*this);
+}
+
 void ToolItem::useItem() {
   if (this->health > 0) {
     this->health--;
@@ -147,12 +159,12 @@ int ToolItem::getNameLength(){
   else{
     cnt=2;
   }
-  cnt += this->getName().size() + 3;
+  cnt += this->getName().size() + 2;
   return cnt;
 }
 
 void ToolItem::print(ostream& s, int mxLength){
-  s << this->name << " (" << this->getHealth() << ")";
+  s << this->name << "(" << this->getHealth() << ")";
   for(int i=this->getNameLength(); i<mxLength; i++){
     s << " ";
   }

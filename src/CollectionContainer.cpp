@@ -8,10 +8,12 @@ CollectionContainer::CollectionContainer() {
 CollectionContainer::CollectionContainer(int mxRow, int mxCol) {
   this->mxRow = mxRow;
   this->mxCol = mxCol;
+  
   for (int i = 0; i < this->mxRow; i++) {
     vector<Slot> s;
     for (int j = 0; j < this->mxCol; j++) {
-      s.push_back(Slot(i * mxCol + j));
+      Slot slot(i*mxCol+j);
+      s.push_back(slot);
     }
     container.push_back(s);
   }
@@ -32,12 +34,6 @@ CollectionContainer::CollectionContainer(const CollectionContainer &cc) {
 
 // destructor
 CollectionContainer::~CollectionContainer() {
-  for (auto &p : this->container) {
-    for (auto q : p) {
-      q.~Slot();
-    }
-    p.clear();
-  }
   this->container.clear();
 }
 
@@ -49,7 +45,8 @@ CollectionContainer &CollectionContainer::operator=(CollectionContainer &cc) {
   for (int i = 0; i < this->mxRow; i++) {
     vector<Slot> s;
     for (int j = 0; j < this->mxCol; j++) {
-      s.push_back(cc.container[i][j]);
+      Slot ss = cc.container[i][j];
+      s.push_back(ss);
     }
     container.push_back(s);
   }
@@ -78,11 +75,11 @@ bool CollectionContainer::operator==(CollectionContainer &cc) {
   return output;
 }
 
-Slot &CollectionContainer::operator[](const Position &pos) {
+Slot CollectionContainer::operator[](const Position &pos) const{
   return this->container[pos.row][pos.col];
 }
 
-void CollectionContainer::insertItem(Position p, Item* item, int count = 1) {
+void CollectionContainer::insertItem(Position p, Item* item, int count) {
   if (this->container[p.row][p.col].full()) {
     // exception
   } else if (this->container[p.row][p.col].empty()) {
@@ -97,7 +94,7 @@ void CollectionContainer::insertItem(Position p, Item* item, int count = 1) {
   }
 }
 
-void CollectionContainer::deleteItem(Position p, int count) {
+void CollectionContainer::deleteItem(Position p, int count ) {
   if (this->container[p.row][p.col].empty()) {
     // exception
   } else {
@@ -110,14 +107,15 @@ bool CollectionContainer::isEmpty(Position p) const {
 }
 
 ostream &operator<<(ostream &stream, const CollectionContainer &cc) {
-  for (auto p : cc.container) {
-    int mx = -1;
-    for (auto q : p) {
-      mx = max(mx, q.get_contents()->getNameLength());
+  vector<int> mx(cc.mxCol, -1);
+  for (int i=0; i<cc.mxRow; i++) {
+    for(int j=0; j<cc.mxCol; j++) {
+      mx[j] = max(mx[j], cc[{i, j}].get_contents()->getNameLength());
     }
-    for(auto q: p){
-      stream << "[I0 ";
-      q.get_contents()->print(stream, mx);
+    for(int j=0; j<cc.mxCol; j++){
+      stream << "[I" << (cc[{i, j}].get_id()<10?" ":"") << cc[{i, j}].get_id() << " ";
+      cc[{i, j}].get_contents()->print(stream, mx[j]);
+      stream << " " << cc[{i, j}].get_occupied();
       stream << "] ";
     }
     stream << "\n";
