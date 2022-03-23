@@ -34,19 +34,17 @@ Slot::Slot(int id, Item* item, int used) {
 
 Slot::Slot(const Slot& other) {
   this->id = other.id;
-  this->contents = new Item(*other.contents);
+  this->contents = other.contents->clone();
   this->available_slot = other.available_slot;
   this->occupied = other.occupied;
 }
 
-Slot::~Slot() { 
-  delete contents; 
-}
+Slot::~Slot() { delete contents; }
 
 Slot& Slot::operator=(Slot& other) {
   this->id = other.id;
   delete this->contents;
-  this->contents = other.contents->clone();
+  this->contents = other.contents;
   this->available_slot = other.available_slot;
   return *this;
 }
@@ -97,18 +95,18 @@ int Slot::get_available_slot() { return this->available_slot; }
 
 int Slot::get_occupied() { return this->occupied; }
 
-void Slot::print(ostream& stream, int mxLen) { 
+void Slot::print(ostream& stream, int mxLen) {
   this->contents->print(stream, mxLen);
   stream << " ";
-  if(this->get_occupied()<10){
+  if (this->get_occupied() < 10) {
     stream << " ";
   }
   stream << "(" << this->get_occupied() << ")";
 }
 
-bool Slot::operator==(const Slot& other) { 
-  return *this->contents == *other.contents; 
+bool Slot::operator==(const Slot& other) {
+  return *this->contents == *other.contents;
 }
-bool Slot::operator!=(const Slot& other) { 
-  return *this->contents == *other.contents; 
+bool Slot::operator!=(const Slot& other) {
+  return *this->contents == *other.contents;
 }

@@ -10,7 +10,7 @@
     {
       "label": "BuildProgram",
       "command": "make",
-      "args": ["compile"],
+      "args": ["main-debugger"],
       "type": "shell"
     }
   ]
