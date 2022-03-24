@@ -59,99 +59,10 @@ ItemType Item::getType() const { return this->type; }
 
 string Item::getName() const { return this->name; }
 
-NonToolItem::NonToolItem() : Item() { this->category = "NULL"; }
-
-NonToolItem::NonToolItem(const NonToolItem& copy) : Item(copy) {
-  this->category = copy.category;
-}
-
-NonToolItem::NonToolItem(int itemId, string name, string category)
-    : Item(itemId, name, NONTOOLS, MXNONTOOL) {
-  this->category = category;
-}
-
-NonToolItem::~NonToolItem() {}
-
-Item* NonToolItem::clone() { return new NonToolItem(*this); }
-
-string NonToolItem::getCategory() const { return this->category; }
-
-NonToolItem& NonToolItem::operator=(const NonToolItem& other) {
-  Item::operator=(other);
-  this->category = other.category;
-  return *this;
-}
-
-bool NonToolItem::operator==(const Item& other) {
-  if (other.getType() != this->getType()) {
-    return false;
-  } else if (other.getItemId() == CATEGORY_ID ||
-             this->getItemId() == CATEGORY_ID) {
-    const NonToolItem& o = dynamic_cast<const NonToolItem&>(other);
-    string thisCategory = this->getCategory();
-    return o.getCategory() == thisCategory;
-  } else if (Item::operator==(other)) {
-    return true;
-  }
-
-  return false;
-}
-
-bool NonToolItem::operator!=(const Item& other) { return !((*this) == other); }
-
 int Item::getNameLength() { return this->getName().size(); }
 
 void Item::print(ostream& s, int mxLength) {
   s << this->name;
-  for (int i = this->getNameLength(); i < mxLength; i++) {
-    s << " ";
-  }
-}
-
-ToolItem& ToolItem::operator=(const ToolItem& other) {
-  Item::operator=(other);
-  this->health = health;
-  return *this;
-}
-
-ToolItem::ToolItem() : Item() { this->health = 10; }
-
-ToolItem::ToolItem(const ToolItem& copy) : Item(copy) {
-  this->health = copy.health;
-}
-
-ToolItem::ToolItem(int itemId, string name)
-    : Item(itemId, name, TOOLS, MXTOOL) {
-  this->health = 10;
-}
-
-ToolItem::~ToolItem() {}
-
-Item* ToolItem::clone() { return new ToolItem(*this); }
-
-void ToolItem::useItem() {
-  if (this->health > 0) {
-    this->health--;
-  }
-}
-
-int ToolItem::getHealth() const { return this->health; }
-
-void ToolItem::setHealth(int newHealth) { this->health = newHealth; }
-
-int ToolItem::getNameLength() {
-  int cnt = 0;
-  if (this->getHealth() < 10) {
-    cnt = 1;
-  } else {
-    cnt = 2;
-  }
-  cnt += this->getName().size() + 2;
-  return cnt;
-}
-
-void ToolItem::print(ostream& s, int mxLength) {
-  s << this->name << "(" << this->getHealth() << ")";
   for (int i = this->getNameLength(); i < mxLength; i++) {
     s << " ";
   }

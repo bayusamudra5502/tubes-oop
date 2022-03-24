@@ -37,35 +37,3 @@ class Item {
   virtual void print(ostream&, int);
 };
 
-class NonToolItem : public Item {
- private:
-  string category;
-
- public:
-  NonToolItem();
-  NonToolItem(const NonToolItem& copy);
-  NonToolItem(int itemId, string name, string category);
-  virtual bool operator==(const Item& other);
-  virtual bool operator!=(const Item& other);
-  virtual ~NonToolItem();
-  virtual Item* clone();
-  NonToolItem& operator=(const NonToolItem& other);
-  string getCategory() const;
-};
-
-class ToolItem : public Item {
-  int health;  // bernilai awal 10, akan dikurangi 1 per penggunaan toolitem
-
- public:
-  ToolItem();
-  ToolItem(const ToolItem& copy);
-  ToolItem(int itemId, string name);
-  virtual ~ToolItem();
-  virtual Item* clone();
-  ToolItem& operator=(const ToolItem& other);
-  int getNameLength();
-  int getHealth() const;
-  void useItem();
-  void setHealth(int newHealth);
-  void print(ostream&, int);
-};
