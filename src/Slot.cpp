@@ -44,7 +44,7 @@ Slot::~Slot() { delete contents; }
 Slot& Slot::operator=(Slot& other) {
   this->id = other.id;
   delete this->contents;
-  this->contents = other.contents;
+  this->contents = other.contents->clone();
   this->available_slot = other.available_slot;
   return *this;
 }
@@ -80,11 +80,9 @@ void Slot::remove(int count = 1) {
     this->contents = new Item();
     this->occupied = 0;
     this->available_slot = MXNONTOOL;
-  }
-  else if(this->occupied < count){
+  } else if (this->occupied < count) {
     throw new SlotUnderflow(this->occupied, count);
-  } 
-  else {
+  } else {
     this->occupied -= count;
     this->available_slot += count;
   }
