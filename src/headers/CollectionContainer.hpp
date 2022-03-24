@@ -1,6 +1,6 @@
 #pragma once
 #include <Slot.hpp>
-
+#include <exception/ErrorInsertCC.hpp>
 
 struct Position {
   int row, col;
