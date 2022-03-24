@@ -37,10 +37,10 @@ class Inventory {
   void deleteItem(Position p, int count = 1);
 
   bool isEmpty(Position p) const;
-  void giveItem(Item * item, int Qty);
   virtual Inventory* clone();
+  void giveItem(Item * item, int Qty);
   void moveItem(string id, int N, vector<string> destId, Inventory* dest);
-
+  void useItem(int row, int col);
   friend ostream &operator<<(ostream &stream, const Inventory &cc);
   friend ofstream &operator<<(ofstream &stream, const Inventory &cc);
 };

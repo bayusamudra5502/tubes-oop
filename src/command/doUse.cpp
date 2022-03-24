@@ -4,22 +4,11 @@
 
 void doUse(Inventory& inventory) {
   string location;
-  int count;
-  cin >> location >> count;
+  cin >> location;
 
   struct InventoryMap map = extractId(location, MAX_INVENTORY_COL);
-  inventory.deleteItem({map.col, map.row}, count);
-
-  string itemId;
-  cin >> itemId;
-  struct InventoryMap invmap = extractId(itemId, 9);
-  Item* usedItem = inventory[{invmap.row, invmap.col}].get_contents();
-  if (usedItem->getType() == TOOLS) {
-    ToolItem* toolItem = dynamic_cast<ToolItem*>(usedItem);
-    if (toolItem != nullptr) {
-      toolItem->useItem();
-    }
-  } else {
-    throw new UseNonToolItem();
+  inventory.useItem(map.row, map.col);
+  if(dynamic_cast<ToolItem*>(inventory[{map.row, map.col}].get_contents())->getHealth()==0){
+    inventory.deleteItem({map.row, map.col});
   }
 }

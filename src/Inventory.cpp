@@ -177,6 +177,10 @@ void Inventory::moveItem(string id, int N, vector<string> destId,
   }
 }
 
+void Inventory::useItem(int row, int col){
+  this->container[row][col].useItem();
+}
+
 void Inventory::insertItem(Position p, Item *item, int count) {
   if (p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0) {
     throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);

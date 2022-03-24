@@ -3,7 +3,7 @@
 
 ToolItem& ToolItem::operator=(const ToolItem& other) {
   Item::operator=(other);
-  this->health = health;
+  this->health = other.health;
   return *this;
 }
 

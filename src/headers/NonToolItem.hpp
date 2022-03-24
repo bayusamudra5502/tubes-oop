@@ -9,10 +9,10 @@ class NonToolItem : public Item {
   NonToolItem();
   NonToolItem(const NonToolItem& copy);
   NonToolItem(int itemId, string name, string category);
-  virtual bool operator==(const Item& other);
-  virtual bool operator!=(const Item& other);
-  virtual ~NonToolItem();
-  virtual Item* clone();
+  bool operator==(const Item& other);
+  bool operator!=(const Item& other);
+  ~NonToolItem();
+  Item* clone();
   NonToolItem& operator=(const NonToolItem& other);
   string getCategory() const;
 };

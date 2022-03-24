@@ -32,6 +32,7 @@ class Slot {
   Item* get_contents();
   int get_available_slot();
   int get_occupied();
+  void useItem();
 
   void print(ostream& stream, int mxLen);
 

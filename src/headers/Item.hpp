@@ -33,6 +33,7 @@ class Item {
   bool isEmpty();
   virtual int getNameLength();
   virtual Item* clone();
+  virtual void useItem();
   ItemType getType() const;
   virtual void print(ostream&, int);
 };

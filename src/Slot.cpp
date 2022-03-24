@@ -97,6 +97,10 @@ int Slot::get_available_slot() { return this->available_slot; }
 
 int Slot::get_occupied() { return this->occupied; }
 
+void Slot::useItem(){
+  this->contents->useItem();
+}
+
 void Slot::print(ostream& stream, int mxLen) {
   this->contents->print(stream, mxLen);
   stream << " ";

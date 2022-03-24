@@ -1,4 +1,5 @@
 #include <Item.hpp>
+#include <exception/UseNonToolItem.hpp>
 
 Item::Item() {
   this->name = "KOSONG";
@@ -60,6 +61,10 @@ ItemType Item::getType() const { return this->type; }
 string Item::getName() const { return this->name; }
 
 int Item::getNameLength() { return this->getName().size(); }
+
+void Item::useItem(){
+  throw new UseNonToolItem();
+}
 
 void Item::print(ostream& s, int mxLength) {
   s << this->name;

@@ -8,8 +8,8 @@ class ToolItem : public Item {
   ToolItem();
   ToolItem(const ToolItem& copy);
   ToolItem(int itemId, string name);
-  virtual ~ToolItem();
-  virtual Item* clone();
+  ~ToolItem();
+  Item* clone();
   ToolItem& operator=(const ToolItem& other);
   int getNameLength();
   int getHealth() const;
