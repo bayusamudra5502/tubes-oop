@@ -1,4 +1,4 @@
-make -f /home/dawetmaster/repos/tubes-oop/makefile --dry-run --keep-going --print-directory
+make -f /home/dawetmaster/repos/tubes-oop/makefile --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/dawetmaster/repos/tubes-oop'
 make: Leaving directory '/home/dawetmaster/repos/tubes-oop'
  
