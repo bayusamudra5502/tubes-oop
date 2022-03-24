@@ -85,9 +85,18 @@ int main() {
         cin >> outputPath;
         ofstream outputFile(outputPath);
         outputFile << inventory;
+      } else if(command == "SHOW"){
+        cout << craftingTable << "\n";
+        cout << inventory << "\n";
       } else if (command == "CRAFT") {
+
       } else if (command == "GIVE") {
+        string itemName;
+        int itemQty;
+        cin >> itemName >> itemQty;
+        inventory.giveItem(items[itemName], itemQty);
       } else if (command == "MOVE") {
+
       } else if (command == "DISCARD") {
       } else if (command == "USE") {
       } else if (command == "MULTIMOVE") {
