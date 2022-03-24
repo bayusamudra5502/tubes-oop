@@ -110,5 +110,5 @@ bool Slot::operator==(const Slot& other) {
 }
 
 bool Slot::operator!=(const Slot& other) {
-  return *this->contents == *other.contents;
+  return *this->contents != *other.contents;
 }
