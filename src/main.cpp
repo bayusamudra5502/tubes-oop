@@ -101,6 +101,7 @@ int main() {
       } else if (command == "DISCARD") {
         doDiscard(inventory);
       } else if (command == "USE") {
+        doUse(inventory);
       } else if (command == "MULTIMOVE") {
       } else {
         cout << "Invalid command" << endl;

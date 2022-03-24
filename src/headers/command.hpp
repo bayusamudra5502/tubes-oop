@@ -7,3 +7,4 @@ using namespace std;
 #define MAX_CRAFT_COL 3
 
 void doDiscard(Inventory&);
+void doUse(Inventory&);
