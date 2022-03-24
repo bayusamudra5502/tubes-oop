@@ -1,4 +1,9 @@
-make.exe --dry-run --always-make --keep-going --print-directory
-'make.exe' is not recognized as an internal or external command,
-operable program or batch file.
+make -f /home/dawetmaster/repos/tubes-oop/makefile --dry-run --keep-going --print-directory
+make: Entering directory '/home/dawetmaster/repos/tubes-oop'
+make: Leaving directory '/home/dawetmaster/repos/tubes-oop'
+ 
+make: /home/dawetmaster/repos/tubes-oop/makefile: No such file or directory
+make: *** No rule to make target '/home/dawetmaster/repos/tubes-oop/makefile'.
+make: Failed to remake makefile '/home/dawetmaster/repos/tubes-oop/makefile'.
+make: *** No targets specified and no makefile found.  Stop.
  
