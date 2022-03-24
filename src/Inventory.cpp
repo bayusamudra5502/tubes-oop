@@ -90,34 +90,33 @@ bool Inventory::operator==(Inventory &cc) {
   return output;
 }
 
-Slot Inventory::operator[](const Position &pos) const {
-  if (pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol ||
-      pos.col < 0) {
-    // throw
+Slot Inventory::operator[](const Position &pos) const{
+  if(pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol || pos.col < 0){
+      throw new IndexOutBondCC(mxRow, mxCol, pos.row, pos.col);
   }
   return this->container[pos.row][pos.col];
 }
 
 char Inventory::getType() const { return this->Type; }
 
-void Inventory::insertItem(Position p, Item *item, int count) {
-  if (p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0) {
-    throw new IndexOutBondCC(mxRow, mxCol);
-  }
-  this->container[p.row][p.col].insert(item, count);
+void Inventory::insertItem(Position p, Item* item, int count) {
+    if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
+      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
+    }
+    this->container[p.row][p.col].insert(item, count);
 }
 
-void Inventory::deleteItem(Position p, int count) {
-  if (p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0) {
-    throw new IndexOutBondCC(mxRow, mxCol);
-  }
+void Inventory::deleteItem(Position p, int count ) {
+    if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
+      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
+    }
 
   this->container[p.row][p.col].remove(count);
 }
 
 bool Inventory::isEmpty(Position p) const {
-  if (p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0) {
-    throw new IndexOutBondCC(mxRow, mxCol);
+  if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
+      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
   }
   return this->container[p.row][p.col].empty();
 }
