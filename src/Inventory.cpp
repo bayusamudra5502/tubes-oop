@@ -143,7 +143,7 @@ ostream &operator<<(ostream &stream, const Inventory &cc) {
 ofstream &operator<<(ofstream &stream, const Inventory &cc) {
   for (int i = 0; i < cc.mxRow; i++) {
     for (int j = 0; j < cc.mxCol; j++) {
-      stream << cc[{i, j}].get_contents()->getItemId() << ":"
+      stream << cc[{i, j}].get_id() << ":"
              << cc[{i, j}].get_occupied();
       stream << "\n";
     }
