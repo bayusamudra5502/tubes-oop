@@ -2,7 +2,7 @@
 #include <sstream>
 
 SlotUnderflow::SlotUnderflow(int sz, int discard): BaseException("Slot Underflow"){
-    this->sz;
+    this->sz = sz;
     this->discard = discard;
 }
 

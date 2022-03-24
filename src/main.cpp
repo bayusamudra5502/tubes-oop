@@ -35,10 +35,9 @@ int main() {
       }
     }
     if(!items.isKeyExist(category)&&category!="-"){
-      items.insertItem(category, new NonToolItem(CATEGORY_ID, "*", category)); // ini bener kan non tool?
+      items.insertItem(category, new NonToolItem(CATEGORY_ID, "*", category));
     }
   }
-
   // read recipes
   for (const auto &entry :
     filesystem::directory_iterator(configPath + "/recipe")) {
@@ -65,12 +64,15 @@ int main() {
           vSlot.push_back(Slot());
         }
       }
+      cout << "HI\n";
     }
     stringstream ssOut(v.back());
     string outItemName;
     int outQty;
     ssOut >> outItemName >> outQty;
+    
     Slot outSlot(0, items[outItemName], outQty);
+    cout << outItemName << "\n";
     Recipe recipe(n, m, vSlot, outSlot);
   }
   CollectionContainer inventory;
