@@ -1,4 +1,5 @@
-#include "ToolItem.hpp"
+#include <ToolItem.hpp>
+#include <exception/UseNonToolItem.hpp>
 
 ToolItem& ToolItem::operator=(const ToolItem& other) {
   Item::operator=(other);
@@ -26,7 +27,7 @@ void ToolItem::useItem() {
     this->health--;
   }
   if (this->type != TOOLS) {
-      throw new UseNonToolItem(type);
+    throw new UseNonToolItem();
   }
 }
 
