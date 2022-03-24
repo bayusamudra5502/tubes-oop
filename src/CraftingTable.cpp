@@ -1,9 +1,9 @@
 #include <CraftingTable.hpp>
 
-CraftingTable::CraftingTable() : CollectionContainer(3, 3, 'C') {}
+CraftingTable::CraftingTable() : Inventory(3, 3, 'C') {}
 
 CraftingTable::CraftingTable(const CraftingTable& ct)
-    : CollectionContainer(ct) {}
+    : Inventory(ct) {}
 
 bool CraftingTable::operator==(const CraftingTable& ct) {
   CraftingTable cp(ct);

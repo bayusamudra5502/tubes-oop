@@ -1,5 +1,5 @@
 // sample main file, replace this with your own code
-#include <CollectionContainer.hpp>
+#include <Inventory.hpp>
 #include <Map.hpp>
 #include <RecipeBook.hpp>
 #include <exception/BaseException.hpp>
@@ -73,7 +73,7 @@ int main() {
     cout << outItemName << "\n";
     Recipe recipe(n, m, vSlot, outSlot);
   }
-  CollectionContainer inventory;
+  Inventory inventory;
   CraftingTable craftingTable;
 
   // sample interaction

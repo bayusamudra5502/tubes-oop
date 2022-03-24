@@ -1,9 +1,9 @@
 #pragma once
-#include <CollectionContainer.hpp>
+#include <Inventory.hpp>
 
 class Recipe;
 
-class CraftingTable : public CollectionContainer {
+class CraftingTable : public Inventory {
  public:
   CraftingTable();
   CraftingTable(const CraftingTable& ct);

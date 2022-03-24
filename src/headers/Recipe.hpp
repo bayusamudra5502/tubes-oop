@@ -1,12 +1,10 @@
 #pragma once
 
-#include <CollectionContainer.hpp>
 #include <CraftingTable.hpp>
-#include <Slot.hpp>
 
 using namespace std;
 
-class Recipe : private CollectionContainer {
+class Recipe : private Inventory {
  private:
   Slot result;
 

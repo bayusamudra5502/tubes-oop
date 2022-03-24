@@ -1,21 +1,43 @@
 #pragma once
-#include <CollectionContainer.hpp>
+#include <Slot.hpp>
+#include <exception/IndexOutBondCC.hpp>
 
-class Inventory : public CollectionContainer {
-  public:
-    // constructor
-    Inventory();
+struct Position {
+  int row, col;
+};
 
-    // copy constructor
-    Inventory(const Inventory &inv);
+class Inventory {
+ protected:
+  vector<vector<Slot>> container;
+  int mxRow;  // banyak baris
+  int mxCol;  // banyak kolom
+  char Type;
 
-    // destructor
-    ~Inventory();
-    Inventory &operator=(const Inventory &inv);
-    bool operator==(const Inventory &inv);
-    Slot operator[](const Position &pos) const;
-    char getType() const;
-    void insertItem(Position p, Item* item, int count = 1);
-    void deleteItem(Position p, int count = 1);
-    bool isEmpty(Position p) const;
+ public:
+  // constructor
+  Inventory();
+  Inventory(int mxRow, int mxCol);
+  Inventory(int mxRow, int mxCol, char type);
+
+  // copy constructor
+  Inventory(const Inventory &cc);
+
+  // destructor
+  ~Inventory();
+
+  // operator
+  Inventory &operator=(Inventory &cc);
+
+  bool operator==(Inventory &cc);
+  Slot operator[](const Position &pos) const;
+  char getType() const;
+
+  void insertItem(Position p, Item* item, int count = 1);
+  void deleteItem(Position p, int count = 1);
+
+  bool isEmpty(Position p) const;
+
+
+  friend ostream &operator<<(ostream &stream, const Inventory &cc);
+  friend ofstream &operator<<(ofstream& stream, const Inventory &cc);
 };
