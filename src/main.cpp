@@ -6,12 +6,14 @@
 #include <CollectionContainer.hpp>
 #include <sstream>
 #include <Map.hpp>
+#include <RecipeBook.hpp>
 using namespace std;
 
 int main() {
   string configPath = "./config";
   string itemConfigPath = configPath + "/item.txt";
-  Map<string, tuple<int, string, string>> itemId;
+  Map<string, Item*> items;
+  RecipeBook recipes;
   
   // read item from config file
   ifstream itemConfigFile(itemConfigPath);
@@ -23,11 +25,16 @@ int main() {
     string category;
     string type;
     ss >> id >> name >> category >> type;
-    if(!itemId.isKeyExist(name)){
-      itemId.insertItem(name, {id, category, type});
+    if(!items.isKeyExist(name)){
+      if(type == "TOOL"){
+        items.insertItem(name, new ToolItem(id, name));
+      }
+      else{
+        items.insertItem(name, new NonToolItem(id, name, category));
+      }
     }
-    else{
-      itemId[name] = {id, category, type};
+    if(!items.isKeyExist(category)&&category!="-"){
+      items.insertItem(category, new NonToolItem(CATEGORY_ID, "*", category)); // ini bener kan non tool?
     }
   }
 
@@ -42,20 +49,23 @@ int main() {
       v.push_back(line);
     }
     int n, m;
-    stringstream ss1(v[0]);
-    ss1 >> n >> m;
-    string itemName[n][m];
+    stringstream ssSize(v[0]);
+    ssSize >> n >> m;
+    vector<Slot> vSlot;
     for(int i=0; i<n; i++){
-      stringstream ss2(v[i+1]);
+      stringstream ssItems(v[i+1]);
       for(int j=0; j<m; j++){
-        ss2 >> itemName[i][j];
+        string itemName;
+        ssItems >> itemName;
+        vSlot.push_back(Slot(i*m+j, items[itemName], 1));
       }
     }
-    stringstream ss3(v.back());
+    stringstream ssOut(v.back());
     string outItemName;
     int outQty;
-    ss3 >> outItemName >> outQty;
-    
+    ssOut >> outItemName >> outQty;
+    Slot outSlot(0, items[outItemName], outQty);
+    Recipe recipe(n, m, vSlot, outSlot);
   }
 
   // sample interaction
