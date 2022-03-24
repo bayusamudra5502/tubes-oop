@@ -24,6 +24,6 @@ TEST(ITEM_DICTIONARY, UJI_DICTIONARY) {
   ASSERT_NO_FATAL_FAILURE(vc.push_back(Slot(2, mi["Kucing"])));
   ASSERT_NO_FATAL_FAILURE(vc.push_back(Slot(3, mi["Hewan"])));
   ASSERT_NO_FATAL_FAILURE(vc.push_back(Slot(4, mi["Mobil"])));
-  ASSERT_NO_FATAL_FAILURE(vc.push_back(Slot(4, mi["Sepeda"])));
-  ASSERT_NO_FATAL_FAILURE(vc.push_back(Slot(5, mi["Kendaraan"])));
+  ASSERT_NO_FATAL_FAILURE(vc.push_back(Slot(5, mi["Sepeda"])));
+  ASSERT_NO_FATAL_FAILURE(vc.push_back(Slot(6, mi["Kendaraan"])));
 }

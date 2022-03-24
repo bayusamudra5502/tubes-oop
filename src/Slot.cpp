@@ -16,7 +16,7 @@ Slot::Slot(int id) {
 
 Slot::Slot(int id, Item* item) {
   this->id = id;
-  this->contents = item;
+  this->contents = item->clone();
   this->available_slot = item->getMaxStack();
   this->occupied = 0;
 }
@@ -26,7 +26,7 @@ Slot::Slot(int id, Item* item, int used) {
     throw new SlotOverflow(item->getMaxStack(), used);
   } else {
     this->id = id;
-    this->contents = item;
+    this->contents = item->clone();
     this->available_slot = item->getMaxStack() - used;
     this->occupied = used;
   }
@@ -59,7 +59,7 @@ void Slot::insert(Item* item, int count = 1) {
       throw new SlotOverflow(item->getMaxStack(), count);
     } else {
       this->id = id;
-      this->contents = item;
+      this->contents = item->clone();
       this->available_slot = item->getMaxStack() - count;
       this->occupied = count;
     }
