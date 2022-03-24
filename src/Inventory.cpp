@@ -104,7 +104,7 @@ void Inventory::insertItem(Position p, Item* item, int count) {
 
 void Inventory::deleteItem(Position p, int count ) {
     if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      // throw
+      throw new IndexOutBondCC(mxRow, mxCol);
     }
 
     this->container[p.row][p.col].remove(count);
@@ -112,7 +112,7 @@ void Inventory::deleteItem(Position p, int count ) {
 
 bool Inventory::isEmpty(Position p) const {
   if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      // throw
+      throw new IndexOutBondCC(mxRow, mxCol);
   }
   return this->container[p.row][p.col].empty();
 }
