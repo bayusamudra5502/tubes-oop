@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.hpp"
+#include <exception/UseNonToolItem.hpp>
 
 class ToolItem : public Item {
   int health;  // bernilai awal 10, akan dikurangi 1 per penggunaan toolitem
