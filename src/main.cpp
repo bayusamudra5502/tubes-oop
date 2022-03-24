@@ -2,12 +2,15 @@
 #include <Inventory.hpp>
 #include <Map.hpp>
 #include <RecipeBook.hpp>
+#include <command.hpp>
 #include <exception/BaseException.hpp>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <util.hpp>
+
 using namespace std;
 
 int main() {
@@ -96,9 +99,7 @@ int main() {
         inventory.giveItem(items[itemName], itemQty);
       } else if (command == "MOVE") {
       } else if (command == "DISCARD") {
-        string inventorySlot;
-        int itemQty;
-
+        doDiscard(inventory);
       } else if (command == "USE") {
       } else if (command == "MULTIMOVE") {
       } else {
