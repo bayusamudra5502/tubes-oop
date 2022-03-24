@@ -119,8 +119,9 @@ void Inventory::giveItem(Item *item, int Qty) {
         idSlotKosong = {i, j};
       } else if (*this->container[i][j].get_contents() == *item) {
         pos.push_back({i, j});
-        Qty -= min(Qty, this->container[i][j].get_available_slot());
-        qtyTemp.push_back(this->container[i][j].get_available_slot());
+        int tmp = min(Qty, this->container[i][j].get_available_slot());
+        qtyTemp.push_back(tmp);
+        Qty-=tmp;
       }
     }
   }
