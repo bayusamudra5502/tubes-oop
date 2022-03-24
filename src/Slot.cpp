@@ -62,7 +62,6 @@ void Slot::insert(Item* item, int count = 1) {
       this->contents = item;
       this->available_slot = item->getMaxStack() - count;
       this->occupied = count;
-      
     }
   } else {
     if (this->contents->getName() == "") {

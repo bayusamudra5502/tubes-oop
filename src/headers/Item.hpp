@@ -8,6 +8,7 @@ using namespace std;
 const int MXNONTOOL = 64;
 const int MXTOOL = 1;
 const int MXNULL = -1;
+const int CATEGORY_ID = -2;
 
 class Item {
  protected:
@@ -20,10 +21,10 @@ class Item {
   Item();
   Item(const Item& other);
   Item(int itemId, string name, ItemType type, int maxStack);
-  bool operator==(const Item& other);
-  bool operator>(const Item& other);
-  bool operator<(const Item& other);
-  bool operator!=(const Item& other);
+  virtual bool operator==(const Item& other);
+  virtual bool operator>(const Item& other);
+  virtual bool operator<(const Item& other);
+  virtual bool operator!=(const Item& other);
   virtual Item& operator=(const Item& other);
   virtual ~Item();
   string getName() const;
@@ -44,6 +45,8 @@ class NonToolItem : public Item {
   NonToolItem();
   NonToolItem(const NonToolItem& copy);
   NonToolItem(int itemId, string name, string category);
+  virtual bool operator==(const Item& other);
+  virtual bool operator!=(const Item& other);
   virtual ~NonToolItem();
   virtual Item* clone();
   NonToolItem& operator=(const NonToolItem& other);
@@ -51,7 +54,7 @@ class NonToolItem : public Item {
 };
 
 class ToolItem : public Item {
-  int health; //bernilai awal 10, akan dikurangi 1 per penggunaan toolitem
+  int health;  // bernilai awal 10, akan dikurangi 1 per penggunaan toolitem
 
  public:
   ToolItem();
@@ -64,5 +67,5 @@ class ToolItem : public Item {
   int getHealth() const;
   void useItem();
   void setHealth(int newHealth);
-  void print(ostream&, int) ;
+  void print(ostream&, int);
 };

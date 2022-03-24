@@ -23,13 +23,9 @@ Item::Item(const Item& other) {
 
 Item::~Item() {}
 
-Item* Item::clone(){
-  return new Item(*this);
-}
+Item* Item::clone() { return new Item(*this); }
 
-bool Item::isEmpty(){
-  return this->type == NULLITEM;
-}
+bool Item::isEmpty() { return this->type == NULLITEM; }
 
 bool Item::operator==(const Item& other) {
   return (this->itemId == other.itemId);
@@ -76,9 +72,7 @@ NonToolItem::NonToolItem(int itemId, string name, string category)
 
 NonToolItem::~NonToolItem() {}
 
-Item* NonToolItem::clone(){
-  return new NonToolItem(*this);
-}
+Item* NonToolItem::clone() { return new NonToolItem(*this); }
 
 string NonToolItem::getCategory() const { return this->category; }
 
@@ -87,6 +81,22 @@ NonToolItem& NonToolItem::operator=(const NonToolItem& other) {
   this->category = other.category;
   return *this;
 }
+
+bool NonToolItem::operator==(const Item& other) {
+  if (other.getType() != this->getType()) {
+    return false;
+  } else if (Item::operator==(other)) {
+    return true;
+  } else if (other.getItemId() == CATEGORY_ID ||
+             this->getItemId() == CATEGORY_ID) {
+    const NonToolItem& o = dynamic_cast<const NonToolItem&>(other);
+    return o.getCategory() == this->getCategory();
+  }
+
+  return false;
+}
+
+bool NonToolItem::operator!=(const Item& other) { return !((*this) == other); }
 
 int Item::getNameLength() { return this->getName().size(); }
 
@@ -116,9 +126,7 @@ ToolItem::ToolItem(int itemId, string name)
 
 ToolItem::~ToolItem() {}
 
-Item* ToolItem::clone(){
-  return new ToolItem(*this);
-}
+Item* ToolItem::clone() { return new ToolItem(*this); }
 
 void ToolItem::useItem() {
   if (this->health > 0) {
@@ -141,9 +149,9 @@ int ToolItem::getNameLength() {
   return cnt;
 }
 
-void ToolItem::print(ostream& s, int mxLength){
+void ToolItem::print(ostream& s, int mxLength) {
   s << this->name << "(" << this->getHealth() << ")";
-  for(int i=this->getNameLength(); i<mxLength; i++){
+  for (int i = this->getNameLength(); i < mxLength; i++) {
     s << " ";
   }
 }
