@@ -1,6 +1,6 @@
 #include <CraftingTable.hpp>
 
-CraftingTable::CraftingTable() : CollectionContainer(3, 3) {}
+CraftingTable::CraftingTable() : CollectionContainer(3, 3, 'C') {}
 
 CraftingTable::CraftingTable(const CraftingTable& ct)
     : CollectionContainer(ct) {}

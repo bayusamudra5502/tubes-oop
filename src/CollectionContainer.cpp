@@ -19,10 +19,17 @@ CollectionContainer::CollectionContainer(int mxRow, int mxCol) {
   }
 }
 
+CollectionContainer::CollectionContainer(int mxRow, int mxCol, char type){
+  this->mxRow = mxRow;
+  this->mxCol = mxCol;
+  this->Type = type;
+}
+
 // copy constructor
 CollectionContainer::CollectionContainer(const CollectionContainer &cc) {
   this->mxRow = cc.mxRow;
   this->mxCol = cc.mxCol;
+  this->Type = cc.Type;
   for (int i = 0; i < this->mxRow; i++) {
     vector<Slot> s;
     for (int j = 0; j < this->mxCol; j++) {
@@ -42,6 +49,7 @@ CollectionContainer &CollectionContainer::operator=(CollectionContainer &cc) {
   this->container.clear();
   this->mxRow = cc.mxRow;
   this->mxCol = cc.mxCol;
+  this->Type = cc.Type;
   for (int i = 0; i < this->mxRow; i++) {
     vector<Slot> s;
     for (int j = 0; j < this->mxCol; j++) {
@@ -55,7 +63,7 @@ CollectionContainer &CollectionContainer::operator=(CollectionContainer &cc) {
 }
 
 bool CollectionContainer::operator==(CollectionContainer &cc) {
-  bool output = true;
+  bool output = this->Type == cc.Type;
   if (this->mxCol == cc.mxCol && this->mxRow == cc.mxRow) {
     int i = 0;
     while (i < this->mxRow && output) {
@@ -77,6 +85,10 @@ bool CollectionContainer::operator==(CollectionContainer &cc) {
 
 Slot CollectionContainer::operator[](const Position &pos) const{
   return this->container[pos.row][pos.col];
+}
+
+char CollectionContainer::getType() const{
+  return this->Type;
 }
 
 void CollectionContainer::insertItem(Position p, Item* item, int count) {
@@ -113,7 +125,7 @@ ostream &operator<<(ostream &stream, const CollectionContainer &cc) {
       mx[j] = max(mx[j], cc[{i, j}].get_contents()->getNameLength());
     }
     for(int j=0; j<cc.mxCol; j++){
-      stream << "[I" << (cc[{i, j}].get_id()<10?" ":"") << cc[{i, j}].get_id() << " ";
+      stream << "[" << cc.getType() << (cc[{i, j}].get_id()<10?" ":"") << cc[{i, j}].get_id() << " ";
       cc[{i, j}].get_contents()->print(stream, mx[j]);
       stream << " " << cc[{i, j}].get_occupied();
       stream << "] ";
