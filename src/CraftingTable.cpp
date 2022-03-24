@@ -30,7 +30,7 @@ void CraftingTable::craft(){
         this->deleteItem({i, j}, 1);
       }
     }
-  }catch(exception e){
+  }catch(BaseException* e){
     this->operator=(*tempC);
     throw e;
   }

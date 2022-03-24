@@ -36,6 +36,7 @@ int main() {
         cout << craftingTable << "\n";
         cout << inventory << "\n";
       } else if (command == "CRAFT") {
+        doCraft(craftingTable, inventory, recipes);
       } else if (command == "GIVE") {
         string itemName;
         int itemQty;
