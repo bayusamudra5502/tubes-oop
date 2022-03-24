@@ -25,9 +25,6 @@ void ToolItem::useItem() {
   if (this->health > 0) {
     this->health--;
   }
-  if (this->type != TOOLS) {
-      throw new UseNonToolItem(type);
-  }
 }
 
 int ToolItem::getHealth() const { return this->health; }
