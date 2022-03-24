@@ -85,12 +85,13 @@ NonToolItem& NonToolItem::operator=(const NonToolItem& other) {
 bool NonToolItem::operator==(const Item& other) {
   if (other.getType() != this->getType()) {
     return false;
-  } else if (Item::operator==(other)) {
-    return true;
   } else if (other.getItemId() == CATEGORY_ID ||
              this->getItemId() == CATEGORY_ID) {
     const NonToolItem& o = dynamic_cast<const NonToolItem&>(other);
-    return o.getCategory() == this->getCategory();
+    string thisCategory = this->getCategory();
+    return o.getCategory() == thisCategory;
+  } else if (Item::operator==(other)) {
+    return true;
   }
 
   return false;
