@@ -1,5 +1,7 @@
 #pragma once
 #include <Item.hpp>
+#include <NonToolItem.hpp>
+#include <ToolItem.hpp>
 
 class Slot {
  private:
@@ -18,7 +20,6 @@ class Slot {
   Slot& operator=(Slot& other);
   bool operator==(const Slot& other);
   bool operator!=(const Slot& other);
-
 
   bool empty() const;
   bool full() const;

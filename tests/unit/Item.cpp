@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 
 #include <Item.hpp>
+#include <NonToolItem.hpp>
+#include <ToolItem.hpp>
 
 TEST(ITEM, ITEM_EQUALITY) {
   vector<Item*> i;
