@@ -1,13 +1,13 @@
 // sample main file, replace this with your own code
+#include <CollectionContainer.hpp>
+#include <Map.hpp>
+#include <RecipeBook.hpp>
+#include <exception/BaseException.hpp>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <string>
-#include <CollectionContainer.hpp>
 #include <sstream>
-#include <Map.hpp>
-#include <RecipeBook.hpp>
-#include <Exception/BaseException.hpp>
+#include <string>
 using namespace std;
 
 int main() {
@@ -26,42 +26,42 @@ int main() {
     string category;
     string type;
     ss >> id >> name >> category >> type;
-    if(!items.isKeyExist(name)){
-      if(type == "TOOL"){
+    if (!items.isKeyExist(name)) {
+      if (type == "TOOL") {
         items.insertItem(name, new ToolItem(id, name));
-      }
-      else{
+      } else {
         items.insertItem(name, new NonToolItem(id, name, category));
       }
     }
-    if(!items.isKeyExist(category)&&category!="-"){
-      items.insertItem(category, new NonToolItem(CATEGORY_ID, "*", category)); // ini bener kan non tool?
+    if (!items.isKeyExist(category) && category != "-") {
+      items.insertItem(category,
+                       new NonToolItem(CATEGORY_ID, "*",
+                                       category));  // ini bener kan non tool?
     }
   }
 
   // read recipes
-  for (const auto &entry :
-    filesystem::directory_iterator(configPath + "/recipe")) {
+  for (const auto& entry :
+       filesystem::directory_iterator(configPath + "/recipe")) {
     // cout << entry.path() << endl;
     // // read from file and do something
     ifstream recipeConfigFile(entry.path());
     vector<string> v;
-    for(string line; getline(recipeConfigFile, line);){
+    for (string line; getline(recipeConfigFile, line);) {
       v.push_back(line);
     }
     int n, m;
     stringstream ssSize(v[0]);
     ssSize >> n >> m;
     vector<Slot> vSlot;
-    for(int i=0; i<n; i++){
-      stringstream ssItems(v[i+1]);
-      for(int j=0; j<m; j++){
+    for (int i = 0; i < n; i++) {
+      stringstream ssItems(v[i + 1]);
+      for (int j = 0; j < m; j++) {
         string itemName;
         ssItems >> itemName;
-        if(itemName!="-"){
-          vSlot.push_back(Slot(i*m+j, items[itemName], 1));
-        }
-        else{
+        if (itemName != "-") {
+          vSlot.push_back(Slot(i * m + j, items[itemName], 1));
+        } else {
           vSlot.push_back(Slot());
         }
       }
@@ -79,30 +79,23 @@ int main() {
   // sample interaction
   string command;
   while (cin >> command) {
-    try{
+    try {
       if (command == "EXPORT") {
         string outputPath;
         cin >> outputPath;
         ofstream outputFile(outputPath);
         outputFile << inventory;
       } else if (command == "CRAFT") {
-
       } else if (command == "GIVE") {
-        
       } else if (command == "MOVE") {
-        
-      } else if (command == "DISCARD"){
-
-      } else if (command == "USE") { 
-      
+      } else if (command == "DISCARD") {
+      } else if (command == "USE") {
       } else if (command == "MULTIMOVE") {
-      
       } else if (command == "MULTICRAFT") {
-      
       } else {
         cout << "Invalid command" << endl;
       }
-    } catch(BaseException* e){
+    } catch (BaseException* e) {
       cout << e->what() << "\n";
     }
   }

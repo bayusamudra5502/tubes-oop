@@ -28,6 +28,7 @@ KeyNotFound<T>::KeyNotFound(T key) : BaseException("MapKeyNotFound") {
 template <class T>
 string KeyNotFound<T>::what() {
   KeyNotFoundDetail<T>* errorDetail = (KeyNotFoundDetail<T>*)this->errorDetail;
-  string s = "Map key '" + errorDetail->key + "' is not found.";
-  return s;
+  stringstream ss;
+  ss << "Map key '" << errorDetail->key << "' is not found.";
+  return ss.str();
 }
