@@ -1,13 +1,11 @@
 #include <exception/UseNonToolItem.hpp>
 #include <sstream>
 
-UseNonToolItem::UseNonToolItem(ItemType type) : BaseExceptionBaseException("Error using non tool item") {
-	this-> type = type;
+UseNonToolItem::UseNonToolItem() : BaseException("Error using non tool item") {
 }
 
-string NoNonToolItem::what(){
-	string s;
-    stringstream ss(s);
+string UseNonToolItem::what(){
+    stringstream ss;
     ss << this->getErrorName() << " has occured! A non tool item cannot call UseItem() method";
-    return s;
+    return ss.str();
 }
