@@ -7,6 +7,7 @@
 #include <sstream>
 #include <Map.hpp>
 #include <RecipeBook.hpp>
+#include <Exception/BaseException.hpp>
 using namespace std;
 
 int main() {
@@ -14,11 +15,11 @@ int main() {
   string itemConfigPath = configPath + "/item.txt";
   Map<string, Item*> items;
   RecipeBook recipes;
-  
+
   // read item from config file
   ifstream itemConfigFile(itemConfigPath);
   for (string line; getline(itemConfigFile, line);) {
-    cout << line << endl;
+    // cout << line << endl;
     stringstream ss(line);
     int id;
     string name;
@@ -40,9 +41,9 @@ int main() {
 
   // read recipes
   for (const auto &entry :
-       filesystem::directory_iterator(configPath + "/recipe")) {
-    cout << entry.path() << endl;
-    // read from file and do something
+    filesystem::directory_iterator(configPath + "/recipe")) {
+    // cout << entry.path() << endl;
+    // // read from file and do something
     ifstream recipeConfigFile(entry.path());
     vector<string> v;
     for(string line; getline(recipeConfigFile, line);){
@@ -67,47 +68,37 @@ int main() {
     Slot outSlot(0, items[outItemName], outQty);
     Recipe recipe(n, m, vSlot, outSlot);
   }
+  CollectionContainer inventory;
+  CraftingTable craftingTable;
 
   // sample interaction
   string command;
   while (cin >> command) {
-    if (command == "EXPORT") {
-      string outputPath;
-      cin >> outputPath;
-      ofstream outputFile(outputPath);
+    try{
+      if (command == "EXPORT") {
+        string outputPath;
+        cin >> outputPath;
+        ofstream outputFile(outputPath);
+        outputFile << inventory;
+      } else if (command == "CRAFT") {
 
-      // hardcode for first test case
-      outputFile << "21:10" << endl;
-      outputFile << "6:1" << endl;
-      for (int i = 2; i < 27; i++) {
-        outputFile << "0:0" << endl;
+      } else if (command == "GIVE") {
+        
+      } else if (command == "MOVE") {
+        
+      } else if (command == "DISCARD"){
+
+      } else if (command == "USE") { 
+      
+      } else if (command == "MULTIMOVE") {
+      
+      } else if (command == "MULTICRAFT") {
+      
+      } else {
+        cout << "Invalid command" << endl;
       }
-
-      cout << "Exported" << endl;
-    } else if (command == "CRAFT") {
-      cout << "TODO" << endl;
-    } else if (command == "GIVE") {
-      string itemName;
-      int itemQty;
-      cin >> itemName >> itemQty;
-      cout << "TODO" << endl;
-    } else if (command == "MOVE") {
-      // string slotSrc;
-      // int slotQty;
-      // string slotDest;
-      // need to handle multiple destinations
-      //cin >> slotSrc >> slotQty >> slotDest;
-      // CollectionContainer cc(3, 3);
-      // //cc.insertItem({0, 0}, new ToolItem(0, "HADUHAY"));
-      // cout << cc;
-      // cout << "TODO" << endl;
-      Slot* s = new Slot(1, new ToolItem(1, "BLOCK"));
-      Slot* s1 = new Slot(2, new ToolItem(1, "BLOCK"), 10);
-      Slot* s2 = new Slot(3, new NonToolItem(1, "DUAR", "DUARR"));
-      cout << (*s == *s2) << " " << (*s2==*s1) << " " << (*s==*s1) << "\n";
-    } else {
-      // todo
-      cout << "Invalid command" << endl;
+    } catch(BaseException* e){
+      cout << e->what() << "\n";
     }
   }
   return 0;

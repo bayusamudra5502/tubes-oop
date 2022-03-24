@@ -39,4 +39,5 @@ class CollectionContainer {
 
 
   friend ostream &operator<<(ostream &stream, const CollectionContainer &cc);
+  friend ofstream &operator<<(ofstream& stream, const CollectionContainer &cc);
 };
