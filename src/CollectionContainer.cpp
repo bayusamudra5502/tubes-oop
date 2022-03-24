@@ -3,12 +3,13 @@
 CollectionContainer::CollectionContainer() {
   this->mxCol = 0;
   this->mxRow = 0;
+  this->Type = 'I';
 }
 
 CollectionContainer::CollectionContainer(int mxRow, int mxCol) {
   this->mxRow = mxRow;
   this->mxCol = mxCol;
-  
+  this->Type = 'I';
   for (int i = 0; i < this->mxRow; i++) {
     vector<Slot> s;
     for (int j = 0; j < this->mxCol; j++) {

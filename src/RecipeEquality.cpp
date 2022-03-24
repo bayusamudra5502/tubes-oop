@@ -2,8 +2,8 @@
 #include <Recipe.hpp>
 
 bool operator==(const CraftingTable& ct, const Recipe& r) {
-  for (int i = 0; i + r.mxRow <= 3; i++) {
-    for (int j = 0; j + r.mxCol <= 3; j++) {
+  for (int i = 0; i + r.mxRow <= ct.mxRow; i++) {
+    for (int j = 0; j + r.mxCol <= ct.mxCol; j++) {
       CraftingTable ctNew;
 
       for (int k = 0; k < r.mxRow; k++) {
@@ -22,8 +22,8 @@ bool operator==(const CraftingTable& ct, const Recipe& r) {
   }
 
   // Mirror Search
-  for (int i = 0; i + r.mxRow <= 3; i++) {
-    for (int j = 0; j + r.mxCol <= 3; j++) {
+  for (int i = 0; i + r.mxRow <= ct.mxRow; i++) {
+    for (int j = 0; j + r.mxCol <= ct.mxCol; j++) {
       CraftingTable ctNew;
 
       for (int k = 0; k < r.mxRow; k++) {
