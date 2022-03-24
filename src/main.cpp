@@ -12,7 +12,6 @@
 #include <util.hpp>
 using namespace std;
 
-
 int main() {
   string configPath = "./config";
   string itemConfigPath = configPath + "/item.txt";
@@ -60,10 +59,10 @@ int main() {
         string itemName;
         ssItems >> itemName;
         if (itemName != "-") {
-          Slot slot(i*m+j, items[itemName], 1);
+          Slot slot(i * m + j, items[itemName], 1);
           vSlot.push_back(slot);
         } else {
-          Slot slot(i*m+j);
+          Slot slot(i * m + j);
           vSlot.push_back(slot);
         }
       }
@@ -88,11 +87,10 @@ int main() {
         cin >> outputPath;
         ofstream outputFile(outputPath);
         outputFile << inventory;
-      } else if(command == "SHOW"){
+      } else if (command == "SHOW") {
         cout << craftingTable << "\n";
         cout << inventory << "\n";
       } else if (command == "CRAFT") {
-
       } else if (command == "GIVE") {
         string itemName;
         int itemQty;
@@ -103,13 +101,12 @@ int main() {
         int N;
         cin >> src >> N;
         vector<string> dest(N);
-        for(int i=0; i<N; i++){
+        for (int i = 0; i < N; i++) {
           cin >> dest[i];
         }
-        if(src[0]=='I'){
+        if (src[0] == 'I') {
           inventory.moveItem(src, N, dest, &craftingTable);
-        }
-        else{
+        } else {
           craftingTable.moveItem(src, N, dest, &inventory);
         }
       } else if (command == "DISCARD") {

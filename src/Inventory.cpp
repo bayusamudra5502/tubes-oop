@@ -42,7 +42,6 @@ Inventory::Inventory(int mxRow, int mxCol, char type) {
   }
 }
 
-
 // copy constructor
 Inventory::Inventory(const Inventory &cc) {
   this->mxRow = cc.mxRow;
@@ -99,107 +98,101 @@ bool Inventory::operator==(Inventory &cc) {
   return output;
 }
 
-Slot Inventory::operator[](const Position &pos) const{
-  if(pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol || pos.col < 0){
-      throw new IndexOutBondCC(mxRow, mxCol, pos.row, pos.col);
+Slot Inventory::operator[](const Position &pos) const {
+  if (pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol ||
+      pos.col < 0) {
+    throw new IndexOutBondCC(mxRow, mxCol, pos.row, pos.col);
   }
   return this->container[pos.row][pos.col];
 }
 
 char Inventory::getType() const { return this->Type; }
-int Inventory::getmxCol(){
-  return this->mxCol;
-}
+int Inventory::getmxCol() { return this->mxCol; }
 
-void Inventory::giveItem(Item * item, int Qty){
+void Inventory::giveItem(Item *item, int Qty) {
   Position idSlotKosong = {-1, -1};
   vector<Position> pos;
   vector<int> qtyTemp;
-  for(int i=0; i<this->mxRow&&Qty; i++){
-    for(int j=0; j<this->mxCol&&Qty; j++){
-      if(this->container[i][j].empty()&&idSlotKosong.col == -1){
+  for (int i = 0; i < this->mxRow && Qty; i++) {
+    for (int j = 0; j < this->mxCol && Qty; j++) {
+      if (this->container[i][j].empty() && idSlotKosong.col == -1) {
         idSlotKosong = {i, j};
-      }
-      else if(*this->container[i][j].get_contents()==*item){
+      } else if (*this->container[i][j].get_contents() == *item) {
         pos.push_back({i, j});
-        Qty-=min(Qty, this->container[i][j].get_available_slot());
+        Qty -= min(Qty, this->container[i][j].get_available_slot());
         qtyTemp.push_back(this->container[i][j].get_available_slot());
       }
     }
   }
-  if(Qty>0){
-    if(idSlotKosong.col==-1){
+  if (Qty > 0) {
+    if (idSlotKosong.col == -1) {
       throw InventoryOverflow(item->getName(), Qty);
-    }
-    else{
+    } else {
       this->insertItem(idSlotKosong, item, Qty);
-      for(int i=0; i<(int)pos.size(); i++){
+      for (int i = 0; i < (int)pos.size(); i++) {
         this->insertItem(pos[i], item, qtyTemp[i]);
       }
     }
-  }
-  else{
-    for(int i=0; i<(int)pos.size(); i++){
+  } else {
+    for (int i = 0; i < (int)pos.size(); i++) {
       this->insertItem(pos[i], item, qtyTemp[i]);
     }
   }
 }
-Inventory* Inventory::clone(){
-  return new Inventory(*this);
-}
-void Inventory::moveItem(string id, int N, vector<string> destId, Inventory* dest){
-    Inventory* tempThis = this->clone();
-    Inventory* tempDest = dest->clone();
-    try{
-      stringstream ss(id);
-      char collectionId;
-      int posRaw;
-      ss >> collectionId >> posRaw;
-      int row = posRaw/this->getmxCol();
-      int col = posRaw%this->getmxCol();
-      Item* item = this->container[row][col].get_contents();
-      this->deleteItem({row, col}, N);
-      for(int i=0; i<N; i++){
-        char cId;
-        int pRaw;
-        stringstream ssN(destId[i]);
-        ssN >> cId >> pRaw;
-        if(cId != collectionId){
-            col = pRaw%dest->getmxCol();
-            row = pRaw/dest->getmxCol();
-            dest->insertItem({row, col}, item, 1);
-        }
-        else{
-            col = pRaw%this->getmxCol();
-            row = pRaw/this->getmxCol();
-            this->insertItem({row, col}, item, 1);
-        }
-      } 
-    } catch(BaseException* e){
-        this->operator==(*tempThis);
-        dest->operator==(*tempDest);
-        throw e;
+Inventory *Inventory::clone() { return new Inventory(*this); }
+void Inventory::moveItem(string id, int N, vector<string> destId,
+                         Inventory *dest) {
+  Inventory *tempThis = this->clone();
+  Inventory *tempDest = dest->clone();
+  try {
+    stringstream ss(id);
+    char collectionId;
+    int posRaw;
+    ss >> collectionId >> posRaw;
+    int row = posRaw / this->getmxCol();
+    int col = posRaw % this->getmxCol();
+    Item *item = this->container[row][col].get_contents();
+    this->deleteItem({row, col}, N);
+    for (int i = 0; i < N; i++) {
+      char cId;
+      int pRaw;
+      stringstream ssN(destId[i]);
+      ssN >> cId >> pRaw;
+      if (cId != collectionId) {
+        col = pRaw % dest->getmxCol();
+        row = pRaw / dest->getmxCol();
+        dest->insertItem({row, col}, item, 1);
+      } else {
+        col = pRaw % this->getmxCol();
+        row = pRaw / this->getmxCol();
+        this->insertItem({row, col}, item, 1);
+      }
     }
+  } catch (BaseException *e) {
+    this->operator==(*tempThis);
+    dest->operator==(*tempDest);
+    throw e;
+  }
 }
 
-void Inventory::insertItem(Position p, Item* item, int count) {
-    if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
-    }
-    this->container[p.row][p.col].insert(item, count);
+void Inventory::insertItem(Position p, Item *item, int count) {
+  if (p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0) {
+    throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
+  }
+  this->container[p.row][p.col].insert(item, count);
 }
 
-void Inventory::deleteItem(Position p, int count ) {
-    if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
-    }
+void Inventory::deleteItem(Position p, int count) {
+  if (p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0) {
+    throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
+  }
 
   this->container[p.row][p.col].remove(count);
 }
 
 bool Inventory::isEmpty(Position p) const {
-  if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
+  if (p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0) {
+    throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
   }
   return this->container[p.row][p.col].empty();
 }
@@ -214,7 +207,8 @@ ostream &operator<<(ostream &stream, const Inventory &cc) {
       stream << "[" << cc.getType() << (cc[{i, j}].get_id() < 10 ? " " : "")
              << cc[{i, j}].get_id() << " ";
       cc[{i, j}].get_contents()->print(stream, mx[j]);
-      stream << " " << (cc[{i, j}].get_occupied()<10?" ":"") << cc[{i, j}].get_occupied();
+      stream << " " << (cc[{i, j}].get_occupied() < 10 ? " " : "")
+             << cc[{i, j}].get_occupied();
       stream << "] ";
     }
     stream << "\n";
@@ -226,7 +220,7 @@ ostream &operator<<(ostream &stream, const Inventory &cc) {
 ofstream &operator<<(ofstream &stream, const Inventory &cc) {
   for (int i = 0; i < cc.mxRow; i++) {
     for (int j = 0; j < cc.mxCol; j++) {
-      stream << cc[{i, j}].get_id() << ":"
+      stream << cc[{i, j}].get_contents()->getItemId() << ":"
              << cc[{i, j}].get_occupied();
       stream << "\n";
     }
