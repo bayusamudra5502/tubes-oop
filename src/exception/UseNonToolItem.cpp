@@ -5,7 +5,7 @@ UseNonToolItem::UseNonToolItem(ItemType type) : BaseExceptionBaseException("Erro
 	this-> type = type;
 }
 
-string NoNonToolItem::what(){
+string UseNonToolItem::what(){
 	string s;
     stringstream ss(s);
     ss << this->getErrorName() << " has occured! A non tool item cannot call UseItem() method";

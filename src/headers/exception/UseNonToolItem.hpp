@@ -7,4 +7,4 @@ class UseNonToolItem: public BaseException {
 	public:
 		UseNonToolItem(ItemType type);
 		virtual string what();
-}
+};
