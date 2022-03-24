@@ -28,7 +28,7 @@ class Inventory {
 
   // operator
   Inventory &operator=(Inventory &cc);
-
+  int getmxCol();
   bool operator==(Inventory &cc);
   Slot operator[](const Position &pos) const;
   char getType() const;
@@ -37,7 +37,9 @@ class Inventory {
   void deleteItem(Position p, int count = 1);
 
   bool isEmpty(Position p) const;
-  void giveItem(Item *item, int Qty);
+  void giveItem(Item * item, int Qty);
+  virtual Inventory* clone();
+  void moveItem(string id, int N, vector<string> destId, Inventory* dest);
 
   friend ostream &operator<<(ostream &stream, const Inventory &cc);
   friend ofstream &operator<<(ofstream &stream, const Inventory &cc);

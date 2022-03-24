@@ -2,6 +2,8 @@
 
 #include <string>
 #include <tuple>
+#include <vector>
+#include <CraftingTable.hpp>
 using namespace std;
 
 struct InventoryMap {

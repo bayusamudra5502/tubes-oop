@@ -4,7 +4,9 @@ CraftingTable::CraftingTable() : Inventory(3, 3, 'C') {}
 
 CraftingTable::CraftingTable(const CraftingTable& ct)
     : Inventory(ct) {}
-
+Inventory* CraftingTable::clone(){
+  return new CraftingTable(*this);
+}
 bool CraftingTable::operator==(const CraftingTable& ct) {
   CraftingTable cp(ct);
 
@@ -16,6 +18,6 @@ bool CraftingTable::operator==(const CraftingTable& ct) {
       }
     }
   }
-
+  
   return true;
 }
