@@ -2,21 +2,35 @@ TC_FOLDER = tests/test_case
 EXT_IN = in
 EXT_OUT = out
 EXT_ANS = ans
+
 ALL_SRCS = $(shell find src -type f -name "*.cpp")
-ALL_UNIT_TEST = $(shell find ./tests/unit -type f -name "*.cpp")
+ALL_SRCS_OBJ = $(patsubst %.cpp,build/%.o,$(ALL_SRCS))
+
+ALL_UNIT_TEST = $(shell find tests/unit -type f -name "*.cpp")
+ALL_UNIT_TEST_OBJ = $(patsubst %.cpp,build/%.o,$(ALL_UNIT_TEST))
+
 SRCS_NO_MAIN  = $(filter-out src/main.cpp, $(ALL_SRCS))
+SRCS_NO_MAIN_OBJ = $(patsubst %.cpp,build/%.o,$(SRCS_NO_MAIN))
 
 
 all: compile build-actual e2e
 
 # Compile all cpp files except check.cpp
-./bin/main:
-	@mkdir -p bin
-	@g++ -std=c++17 -I"./src/headers" -Wall -O3 -o bin/main $(ALL_SRCS)
+./build/src/%.o: ./src/%.cpp
+	@mkdir -p $(dir $@)
+	@g++ -g -std=c++17 -I"./src/headers" -Wall -c $< -o $@
 
-main-debugger:
+./build/tests/%.o: ./tests/%.cpp
+	@mkdir -p $(dir $@)
+	@g++ -g -std=c++17 -I"./src/headers" -Wall -c $< -o $@
+
+./bin/main: $(ALL_SRCS_OBJ)
 	@mkdir -p bin
-	@g++ -g -std=c++17 -I"./src/headers" -Wall -o bin/main $(ALL_SRCS)
+	@g++ -std=c++17 -I"./src/headers" -Wall -O3 -o bin/main $^
+
+main-debugger: $(ALL_SRCS_OBJ)
+	@mkdir -p bin
+	@g++ -g -std=c++17 -I"./src/headers" -Wall -o bin/main $^
 
 compile: ./bin/main
 
@@ -34,7 +48,7 @@ test-io: tests/engine/check.cpp ./bin/main
 
 e2e: build-actual test-io
 
-unit-test-build: $(SRCS_NO_MAIN) $(ALL_UNIT_TEST)
+unit-test-build: $(SRCS_NO_MAIN_OBJ) $(ALL_UNIT_TEST_OBJ)
 	@mkdir -p bin
 	@g++ -g -I"./src/headers" -std=c++17 -Wall -o ./bin/test $^ -lgtest -pthread
 
@@ -48,10 +62,9 @@ test: unit-test e2e
 
 clean:
 	@rm -rf bin/*
+	@rm -rf build/*
 
-run:
-	@mkdir -p bin
-	@g++ -g -std=c++17 -I"./src/headers" -Wall -o bin/main $(ALL_SRCS)
+run: main-debugger
 	@./bin/main
 
 build: compile
