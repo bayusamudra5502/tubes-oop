@@ -4,38 +4,24 @@
 bool operator==(const CraftingTable& ct, const Recipe& r) {
   for (int i = 0; i + r.mxRow <= ct.mxRow; i++) {
     for (int j = 0; j + r.mxCol <= ct.mxCol; j++) {
-      CraftingTable ctNew;
+      CraftingTable ctNew, ctNewReverse;
 
       for (int k = 0; k < r.mxRow; k++) {
         for (int l = 0; l < r.mxCol; l++) {
           Position pos = {k + i, l + j};
           Slot content = r.container[k][l];
-          ctNew.insertItem(pos, content.get_contents(),
-                           content.get_occupied());
+          ctNewReverse.insertItem(pos, content.get_contents(),
+                                  content.get_occupied());
         }
       }
 
-      if (ctNew == ct) {
-        return true;
-      }
-    }
-  }
-
-  // Mirror Search
-  for (int i = 0; i + r.mxRow <= ct.mxRow; i++) {
-    for (int j = 0; j + r.mxCol <= ct.mxCol; j++) {
-      CraftingTable ctNew;
-
-      for (int k = 0; k < r.mxRow; k++) {
-        for (int l = 0; l < r.mxCol; l++) {
-          Position pos = {k + i, l + j};
-          Slot content = r.container[k][r.mxCol - l];
-          ctNew.insertItem(pos, content.get_contents(),
-                           content.get_occupied());
-        }
+      ctNew = ctNewReverse;
+      for (int k = 0; k < ct.mxRow; k++) {
+        reverse(ctNewReverse.container[k].begin(),
+                ctNewReverse.container[k].end());
       }
 
-      if (ctNew == ct) {
+      if (ctNew == ct || ctNewReverse == ct) {
         return true;
       }
     }

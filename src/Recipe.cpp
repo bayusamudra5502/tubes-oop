@@ -3,6 +3,19 @@
 
 Recipe::Recipe() : Inventory() {}
 
+Recipe::Recipe(const Recipe& r) : Inventory(r) {
+  Slot tmp = r.result;
+  this->result = tmp;
+}
+
+Recipe& Recipe::operator=(const Recipe& r) {
+  Recipe rtmp = r;
+  Inventory::operator=(rtmp);
+  this->result = rtmp.result;
+
+  return *this;
+}
+
 Recipe::Recipe(int row, int col, vector<Slot> item, Slot result)
     : Inventory(row, col) {
   for (int i = 0; i < row; i++) {

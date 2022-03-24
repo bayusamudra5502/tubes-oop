@@ -1,6 +1,23 @@
 #include <RecipeBook.hpp>
 #include <exception/NoRecipe.hpp>
 
+RecipeBook::RecipeBook() {}
+
+RecipeBook::RecipeBook(const RecipeBook& r) {
+  for (auto i : r.db) {
+    this->db.push_back(i);
+  }
+}
+
+RecipeBook& RecipeBook::operator=(const RecipeBook& r) {
+  this->db.clear();
+  for (auto i : r.db) {
+    this->db.push_back(i);
+  }
+
+  return *this;
+}
+
 Slot RecipeBook::find(const CraftingTable& ct) const {
   for (auto i : this->db) {
     if (ct == i) {

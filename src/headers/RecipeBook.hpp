@@ -15,6 +15,9 @@ class RecipeBook {
   Slot getRepairedTools(const CraftingTable& ct) const;
 
  public:
+  RecipeBook();
+  RecipeBook(const RecipeBook& r);
+  RecipeBook& operator=(const RecipeBook& r);
   void insert(const Recipe& r);
   Slot find(const CraftingTable& ct) const;
 };
