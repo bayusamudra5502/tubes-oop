@@ -8,7 +8,9 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <util.hpp>
 using namespace std;
+
 
 int main() {
   string configPath = "./config";
@@ -103,8 +105,16 @@ int main() {
         for(int i=0; i<N; i++){
           cin >> dest[i];
         }
-        inventory.moveItem(src, N, dest, &craftingTable);
+        if(src[0]=='I'){
+          inventory.moveItem(src, N, dest, &craftingTable);
+        }
+        else{
+          craftingTable.moveItem(src, N, dest, &inventory);
+        }
       } else if (command == "DISCARD") {
+        string inventorySlot;
+        int itemQty;
+
       } else if (command == "USE") {
       } else if (command == "MULTIMOVE") {
       } else if (command == "MULTICRAFT") {

@@ -107,6 +107,9 @@ Slot Inventory::operator[](const Position &pos) const{
 }
 
 char Inventory::getType() const { return this->Type; }
+int Inventory::getmxCol(){
+  return this->mxCol;
+}
 
 void Inventory::giveItem(Item * item, int Qty){
   Position idSlotKosong = {-1, -1};
@@ -141,43 +144,43 @@ void Inventory::giveItem(Item * item, int Qty){
     }
   }
 }
-
-void Inventory::moveItem(string id, int N, vector<string> destId, Inventory* dest){
-
-  try{
-    stringstream ss(id);
-    char collectionId;
-    int posRaw;
-    ss >> collectionId >> posRaw;
-    if(this->mxCol==0){
-      //throw 
-    }
-    int col = posRaw%this->mxCol;
-    int row = posRaw/this->mxCol;
-    Item* item = this->container[row][col].get_contents()->clone();
-    this->deleteItem({row, col}, N);
-    for(int i=0; i<N; i++){
-      char cId;
-      int pRaw;
-      stringstream ssN(destId[i]);
-      ssN >> cId >> pRaw;
-      int c = pRaw%this->mxCol;
-      int r = pRaw/this->mxCol;
-      if(cId == collectionId){
-        this->insertItem({r, c}, item, 1);
-      }
-      else{
-        dest->insertItem({r, c}, item, 1);
-        cout << "HI\n";
-      }
-    } 
-  } catch(BaseException* e){
-      *this = temp;
-      dest->operator=(tempC);
-      throw e;
-  }
+Inventory* Inventory::clone(){
+  return new Inventory(*this);
 }
-
+void Inventory::moveItem(string id, int N, vector<string> destId, Inventory* dest){
+    Inventory* tempThis = this->clone();
+    Inventory* tempDest = dest->clone();
+    try{
+      stringstream ss(id);
+      char collectionId;
+      int posRaw;
+      ss >> collectionId >> posRaw;
+      int row = posRaw/this->getmxCol();
+      int col = posRaw%this->getmxCol();
+      Item* item = this->container[row][col].get_contents();
+      this->deleteItem({row, col}, N);
+      for(int i=0; i<N; i++){
+        char cId;
+        int pRaw;
+        stringstream ssN(destId[i]);
+        ssN >> cId >> pRaw;
+        if(cId != collectionId){
+            col = posRaw%dest->getmxCol();
+            row = posRaw/dest->getmxCol();
+            dest->insertItem({row, col}, item, 1);
+        }
+        else{
+            col = posRaw%this->getmxCol();
+            row = posRaw/this->getmxCol();
+            this->insertItem({row, col}, item, 1);
+        }
+      } 
+    } catch(BaseException* e){
+        this->operator==(*tempThis);
+        dest->operator==(*tempDest);
+        throw e;
+    }
+}
 
 void Inventory::insertItem(Position p, Item* item, int count) {
     if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){

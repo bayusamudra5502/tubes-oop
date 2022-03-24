@@ -8,6 +8,7 @@ class CraftingTable : public Inventory {
   CraftingTable();
   CraftingTable(const CraftingTable& ct);
   bool operator==(const CraftingTable& ct);
+  virtual Inventory* clone();
   friend bool operator==(const CraftingTable& ct, const Recipe& r);
   friend bool operator==(const Recipe& r, const CraftingTable& ct);
 };
