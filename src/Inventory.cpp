@@ -1,8 +1,8 @@
 #include <Inventory.hpp>
 
 Inventory::Inventory() {
-  this->mxCol = 3;
-  this->mxRow = 9;
+  this->mxCol = 9;
+  this->mxRow = 3;
   this->Type = 'I';
 }
 
@@ -86,7 +86,7 @@ bool Inventory::operator==(Inventory &cc) {
 
 Slot Inventory::operator[](const Position &pos) const{
   if(pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol || pos.col < 0){
-      // throw
+      throw new IndexOutBondCC(mxRow, mxCol, pos.row, pos.col);
   }
   return this->container[pos.row][pos.col];
 }
@@ -97,14 +97,14 @@ char Inventory::getType() const{
 
 void Inventory::insertItem(Position p, Item* item, int count) {
     if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      throw new IndexOutBondCC(mxRow, mxCol);
+      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
     }
     this->container[p.row][p.col].insert(item, count);
 }
 
 void Inventory::deleteItem(Position p, int count ) {
     if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      throw new IndexOutBondCC(mxRow, mxCol);
+      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
     }
 
     this->container[p.row][p.col].remove(count);
@@ -112,7 +112,7 @@ void Inventory::deleteItem(Position p, int count ) {
 
 bool Inventory::isEmpty(Position p) const {
   if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      throw new IndexOutBondCC(mxRow, mxCol);
+      throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
   }
   return this->container[p.row][p.col].empty();
 }
