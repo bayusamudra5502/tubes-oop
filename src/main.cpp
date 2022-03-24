@@ -96,6 +96,9 @@ int main() {
         inventory.giveItem(items[itemName], itemQty);
       } else if (command == "MOVE") {
       } else if (command == "DISCARD") {
+        string inventorySlot;
+        int itemQty;
+
       } else if (command == "USE") {
       } else if (command == "MULTIMOVE") {
       } else {
