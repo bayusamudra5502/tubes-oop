@@ -20,7 +20,6 @@ class Slot {
   bool operator==(const Slot& other);
   bool operator!=(const Slot& other);
 
-
   bool empty() const;
   bool full() const;
   void insert(Item* item, int count);

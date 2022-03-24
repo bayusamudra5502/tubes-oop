@@ -106,6 +106,7 @@ void Slot::print(ostream& stream, int mxLen) {
 bool Slot::operator==(const Slot& other) {
   return *this->contents == *other.contents;
 }
+
 bool Slot::operator!=(const Slot& other) {
   return *this->contents == *other.contents;
 }

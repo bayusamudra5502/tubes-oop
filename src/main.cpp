@@ -5,13 +5,14 @@
 #include <string>
 #include <CollectionContainer.hpp>
 #include <sstream>
-
+#include <Map.hpp>
 using namespace std;
 
 int main() {
   string configPath = "./config";
   string itemConfigPath = configPath + "/item.txt";
-
+  Map<string, tuple<int, string, string>> itemId;
+  
   // read item from config file
   ifstream itemConfigFile(itemConfigPath);
   for (string line; getline(itemConfigFile, line);) {
@@ -22,7 +23,12 @@ int main() {
     string category;
     string type;
     ss >> id >> name >> category >> type;
-    // TODO pake variabelnya
+    if(!itemId.isKeyExist(name)){
+      itemId.insertItem(name, {id, category, type});
+    }
+    else{
+      itemId[name] = {id, category, type};
+    }
   }
 
   // read recipes
@@ -34,7 +40,6 @@ int main() {
     vector<string> v;
     for(string line; getline(recipeConfigFile, line);){
       v.push_back(line);
-      //cout << line << "\n";
     }
     int n, m;
     stringstream ss1(v[0]);
