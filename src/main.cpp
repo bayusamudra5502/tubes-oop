@@ -2,6 +2,7 @@
 #include <Inventory.hpp>
 #include <Map.hpp>
 #include <RecipeBook.hpp>
+#include <command.hpp>
 #include <exception/BaseException.hpp>
 #include <filesystem>
 #include <fstream>
@@ -112,9 +113,7 @@ int main() {
           craftingTable.moveItem(src, N, dest, &inventory);
         }
       } else if (command == "DISCARD") {
-        string inventorySlot;
-        int itemQty;
-
+        doDiscard(inventory);
       } else if (command == "USE") {
       } else if (command == "MULTIMOVE") {
       } else if (command == "MULTICRAFT") {

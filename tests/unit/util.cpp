@@ -15,7 +15,7 @@ TEST(UTIL_TEST, EXTRACT_ID) {
   result.push_back(extractId("Z0", 9));
   expected.push_back({'Z', 0, 0});
 
-  for (int i = 0; i < result.size(); i++) {
+  for (int i = 0; i < (int)result.size(); i++) {
     ASSERT_EQ(result[i], expected[i]);
   }
 }
