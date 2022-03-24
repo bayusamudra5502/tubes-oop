@@ -1,6 +1,7 @@
 #pragma once
 #include <Slot.hpp>
 #include <exception/IndexOutBondCC.hpp>
+#include <exception/InventoryOverflow.hpp>
 
 struct Position {
   int row, col;

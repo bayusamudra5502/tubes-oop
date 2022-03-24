@@ -125,7 +125,7 @@ void Inventory::giveItem(Item * item, int Qty){
   }
   if(Qty>0){
     if(idSlotKosong.col==-1){
-      //throw exception
+      throw InventoryOverflow(item->getName(), Qty);
     }
     else{
       this->insertItem(idSlotKosong, item, Qty);
