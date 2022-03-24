@@ -165,13 +165,13 @@ void Inventory::moveItem(string id, int N, vector<string> destId, Inventory* des
         stringstream ssN(destId[i]);
         ssN >> cId >> pRaw;
         if(cId != collectionId){
-            col = posRaw%dest->getmxCol();
-            row = posRaw/dest->getmxCol();
+            col = pRaw%dest->getmxCol();
+            row = pRaw/dest->getmxCol();
             dest->insertItem({row, col}, item, 1);
         }
         else{
-            col = posRaw%this->getmxCol();
-            row = posRaw/this->getmxCol();
+            col = pRaw%this->getmxCol();
+            row = pRaw/this->getmxCol();
             this->insertItem({row, col}, item, 1);
         }
       } 
