@@ -58,7 +58,12 @@ int main() {
       for(int j=0; j<m; j++){
         string itemName;
         ssItems >> itemName;
-        vSlot.push_back(Slot(i*m+j, items[itemName], 1));
+        if(itemName!="-"){
+          vSlot.push_back(Slot(i*m+j, items[itemName], 1));
+        }
+        else{
+          vSlot.push_back(Slot());
+        }
       }
     }
     stringstream ssOut(v.back());

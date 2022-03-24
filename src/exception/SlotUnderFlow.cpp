@@ -7,8 +7,7 @@ SlotUnderflow::SlotUnderflow(int sz, int discard): BaseException("Slot Underflow
 }
 
 string SlotUnderflow::what(){
-    string s;
-    stringstream ss(s);
+    stringstream ss;
     ss << this->getErrorName() << " has occured! The current quantity is " << this->sz << " item(s), but you deleted " << this->discard << " item(s).";
-    return s;
+    return ss.str();
 }
