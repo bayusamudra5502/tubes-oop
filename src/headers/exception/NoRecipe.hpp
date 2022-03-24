@@ -6,5 +6,5 @@
 class NoRecipe : public BaseException {
  public:
   NoRecipe();
-  virtual ostream& printError(ostream& os);
+  virtual string what();
 };

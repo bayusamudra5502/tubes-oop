@@ -16,7 +16,7 @@ class KeyNotFound : public BaseException {
  public:
   KeyNotFound(T key);
   ~KeyNotFound() { delete (KeyNotFoundDetail<T>*)(this->errorDetail); }
-  virtual ostream& printError(ostream& os);
+  virtual string what();
 };
 
 template <class T>
@@ -26,9 +26,8 @@ KeyNotFound<T>::KeyNotFound(T key) : BaseException("MapKeyNotFound") {
 }
 
 template <class T>
-ostream& KeyNotFound<T>::printError(ostream& os) {
+string KeyNotFound<T>::what() {
   KeyNotFoundDetail<T>* errorDetail = (KeyNotFoundDetail<T>*)this->errorDetail;
-  os << "Map key '" << errorDetail->key << "' is not found.";
-
-  return os;
+  string s = "Map key '" + errorDetail->key + "' is not found.";
+  return s;
 }

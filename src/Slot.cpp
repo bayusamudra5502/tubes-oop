@@ -23,7 +23,7 @@ Slot::Slot(int id, Item* item) {
 
 Slot::Slot(int id, Item* item, int used) {
   if (item->getMaxStack() - used < 0) {
-    // throw exception
+    throw new SlotOverflow(item->getMaxStack(), used);
   } else {
     this->id = id;
     this->contents = item;
@@ -56,7 +56,7 @@ bool Slot::full() const { return this->available_slot == 0; }
 void Slot::insert(Item* item, int count = 1) {
   if (this->empty()) {
     if (item->getMaxStack() - count < 0) {
-      // throw exception
+      throw new SlotOverflow(item->getMaxStack(), count);
     } else {
       this->id = id;
       this->contents = item;
@@ -67,7 +67,7 @@ void Slot::insert(Item* item, int count = 1) {
     if (this->contents->getName() == "") {
       // throw exception
     } else if (this->available_slot < count) {
-      // throw exception
+      throw new SlotOverflow(this->available_slot, count);
     } else {
       this->available_slot -= count;
       this->occupied += count;
@@ -76,11 +76,15 @@ void Slot::insert(Item* item, int count = 1) {
 }
 
 void Slot::remove(int count = 1) {
-  if (this->occupied == 1) {
+  if (this->occupied == count) {
     this->contents = new Item();
     this->occupied = 0;
     this->available_slot = MXNONTOOL;
-  } else {
+  }
+  else if(this->occupied < count){
+    throw new SlotUnderflow(this->occupied, count);
+  } 
+  else {
     this->occupied -= count;
     this->available_slot += count;
   }

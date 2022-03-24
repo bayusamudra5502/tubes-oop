@@ -1,6 +1,8 @@
 #pragma once
 #include <NonToolItem.hpp>
 #include <ToolItem.hpp>
+#include <exception/SlotUnderflow.hpp>
+#include <exception/SlotOverflow.hpp>
 
 class Slot {
  private:

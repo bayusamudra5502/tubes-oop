@@ -16,5 +16,5 @@ class BaseException {
   string getErrorName() const;
   const void* detail() const;
 
-  virtual ostream& printError(ostream& os) = 0;
+  virtual string what() = 0;
 };

@@ -85,6 +85,9 @@ bool CollectionContainer::operator==(CollectionContainer &cc) {
 }
 
 Slot CollectionContainer::operator[](const Position &pos) const{
+  if(pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol || pos.col < 0){
+      // throw
+  }
   return this->container[pos.row][pos.col];
 }
 
@@ -93,29 +96,24 @@ char CollectionContainer::getType() const{
 }
 
 void CollectionContainer::insertItem(Position p, Item* item, int count) {
-  if (this->container[p.row][p.col].full()) {
-    // exception
-  } else if (this->container[p.row][p.col].empty()) {
-    this->container[p.row][p.col].insert(item, count);
-  } else {
-    if (this->container[p.row][p.col].get_contents()->getName() !=
-        item->getName()) {
-      // exception, nama tidak sama
-    } else {
-      this->container[p.row][p.col].insert(item, count);
+    if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
+      // throw
     }
-  }
+    this->container[p.row][p.col].insert(item, count);
 }
 
 void CollectionContainer::deleteItem(Position p, int count ) {
-  if (this->container[p.row][p.col].empty()) {
-    // exception
-  } else {
+    if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
+      // throw
+    }
+
     this->container[p.row][p.col].remove(count);
-  }
 }
 
 bool CollectionContainer::isEmpty(Position p) const {
+  if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
+      // throw
+  }
   return this->container[p.row][p.col].empty();
 }
 
