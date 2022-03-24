@@ -1,4 +1,5 @@
-#include "ToolItem.hpp"
+#include <ToolItem.hpp>
+#include <exception/UseNonToolItem.hpp>
 
 ToolItem& ToolItem::operator=(const ToolItem& other) {
   Item::operator=(other);
