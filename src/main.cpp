@@ -92,6 +92,7 @@ int main() {
         cout << craftingTable << "\n";
         cout << inventory << "\n";
       } else if (command == "CRAFT") {
+        
 
       } else if (command == "GIVE") {
         string itemName;

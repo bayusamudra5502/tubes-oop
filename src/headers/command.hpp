@@ -1,5 +1,6 @@
 #pragma once
 #include <Inventory.hpp>
+#include <RecipeBook.hpp>
 #include <iostream>
 using namespace std;
 
@@ -8,3 +9,4 @@ using namespace std;
 
 void doDiscard(Inventory&);
 void doUse(Inventory&);
+void doCraft(CraftingTable&, Inventory&, RecipeBook);
