@@ -90,16 +90,9 @@ bool Inventory::operator==(Inventory &cc) {
   return output;
 }
 
-<<<<<<< HEAD
 Slot Inventory::operator[](const Position &pos) const{
   if(pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol || pos.col < 0){
       throw new IndexOutBondCC(mxRow, mxCol, pos.row, pos.col);
-=======
-Slot Inventory::operator[](const Position &pos) const {
-  if (pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol ||
-      pos.col < 0) {
-    // throw
->>>>>>> 5b236cfe2b7a9af808f38c1c53f9d22fd5635541
   }
   return this->container[pos.row][pos.col];
 }
