@@ -64,8 +64,8 @@ void Slot::insert(Item* item, int count = 1) {
       this->occupied = count;
     }
   } else {
-    if (this->contents->getName() == "") {
-      // throw exception
+    if (*this->contents != *item) {
+      throw new NonCompatibleItem(this->contents, item);
     } else if (this->available_slot < count) {
       throw new SlotOverflow(this->available_slot, count);
     } else {

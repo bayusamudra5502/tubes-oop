@@ -3,6 +3,7 @@
 #include <ToolItem.hpp>
 #include <exception/SlotUnderflow.hpp>
 #include <exception/SlotOverflow.hpp>
+#include <exception/NonCompatibleItem.hpp>
 
 class Slot {
  private:
