@@ -41,7 +41,7 @@ build-actual: $(TC_FOLDER)/*.$(EXT_IN) compile
 	done;
 
 # Check
-test-io: tests/engine/check.cpp ./bin/main
+test-io: tests/engine/check.cpp main-debugger
 	@mkdir -p bin
 	@g++ -g -std=c++17 -Wall -o ./bin/checker $<
 	@./bin/checker
