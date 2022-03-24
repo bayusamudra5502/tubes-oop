@@ -11,6 +11,8 @@ using namespace std;
 class RecipeBook {
  private:
   vector<Recipe> db;
+  bool isToolRepair(const CraftingTable& ct) const;
+  Slot getRepairedTools(const CraftingTable& ct) const;
 
  public:
   void insert(const Recipe& r);
