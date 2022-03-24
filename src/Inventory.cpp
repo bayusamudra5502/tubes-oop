@@ -4,6 +4,14 @@ Inventory::Inventory() {
   this->mxCol = 9;
   this->mxRow = 3;
   this->Type = 'I';
+  for (int i = 0; i < 3; i++) {
+    vector<Slot> s;
+    for (int j = 0; j < 9; j++) {
+      Slot slot(i * mxCol + j);
+      s.push_back(slot);
+    }
+    container.push_back(s);
+  }
 }
 
 Inventory::Inventory(int mxRow, int mxCol) {
@@ -13,14 +21,14 @@ Inventory::Inventory(int mxRow, int mxCol) {
   for (int i = 0; i < this->mxRow; i++) {
     vector<Slot> s;
     for (int j = 0; j < this->mxCol; j++) {
-      Slot slot(i*mxCol+j);
+      Slot slot(i * mxCol + j);
       s.push_back(slot);
     }
     container.push_back(s);
   }
 }
 
-Inventory::Inventory(int mxRow, int mxCol, char type){
+Inventory::Inventory(int mxRow, int mxCol, char type) {
   this->mxRow = mxRow;
   this->mxCol = mxCol;
   this->Type = type;
@@ -41,9 +49,7 @@ Inventory::Inventory(const Inventory &cc) {
 }
 
 // destructor
-Inventory::~Inventory() {
-  this->container.clear();
-}
+Inventory::~Inventory() { this->container.clear(); }
 
 // operator
 Inventory &Inventory::operator=(Inventory &cc) {
@@ -84,16 +90,21 @@ bool Inventory::operator==(Inventory &cc) {
   return output;
 }
 
+<<<<<<< HEAD
 Slot Inventory::operator[](const Position &pos) const{
   if(pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol || pos.col < 0){
       throw new IndexOutBondCC(mxRow, mxCol, pos.row, pos.col);
+=======
+Slot Inventory::operator[](const Position &pos) const {
+  if (pos.row > this->mxRow || pos.row < 0 || pos.col > this->mxCol ||
+      pos.col < 0) {
+    // throw
+>>>>>>> 5b236cfe2b7a9af808f38c1c53f9d22fd5635541
   }
   return this->container[pos.row][pos.col];
 }
 
-char Inventory::getType() const{
-  return this->Type;
-}
+char Inventory::getType() const { return this->Type; }
 
 void Inventory::insertItem(Position p, Item* item, int count) {
     if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
@@ -107,7 +118,7 @@ void Inventory::deleteItem(Position p, int count ) {
       throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
     }
 
-    this->container[p.row][p.col].remove(count);
+  this->container[p.row][p.col].remove(count);
 }
 
 bool Inventory::isEmpty(Position p) const {
@@ -119,12 +130,13 @@ bool Inventory::isEmpty(Position p) const {
 
 ostream &operator<<(ostream &stream, const Inventory &cc) {
   vector<int> mx(cc.mxCol, -1);
-  for (int i=0; i<cc.mxRow; i++) {
-    for(int j=0; j<cc.mxCol; j++) {
+  for (int i = 0; i < cc.mxRow; i++) {
+    for (int j = 0; j < cc.mxCol; j++) {
       mx[j] = max(mx[j], cc[{i, j}].get_contents()->getNameLength());
     }
-    for(int j=0; j<cc.mxCol; j++){
-      stream << "[" << cc.getType() << (cc[{i, j}].get_id()<10?" ":"") << cc[{i, j}].get_id() << " ";
+    for (int j = 0; j < cc.mxCol; j++) {
+      stream << "[" << cc.getType() << (cc[{i, j}].get_id() < 10 ? " " : "")
+             << cc[{i, j}].get_id() << " ";
       cc[{i, j}].get_contents()->print(stream, mx[j]);
       stream << " " << cc[{i, j}].get_occupied();
       stream << "] ";
@@ -135,10 +147,11 @@ ostream &operator<<(ostream &stream, const Inventory &cc) {
   return stream;
 }
 
-ofstream &operator<<(ofstream& stream, const Inventory &cc){
-  for(int i=0; i<cc.mxRow; i++){
-    for(int j=0; j<cc.mxCol; j++){
-      stream << cc[{i, j}].get_contents()->getItemId() << ":" << cc[{i, j}].get_occupied();
+ofstream &operator<<(ofstream &stream, const Inventory &cc) {
+  for (int i = 0; i < cc.mxRow; i++) {
+    for (int j = 0; j < cc.mxCol; j++) {
+      stream << cc[{i, j}].get_contents()->getItemId() << ":"
+             << cc[{i, j}].get_occupied();
     }
     stream << "\n";
   }
