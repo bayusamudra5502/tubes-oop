@@ -112,3 +112,9 @@ bool Slot::operator==(const Slot& other) {
 bool Slot::operator!=(const Slot& other) {
   return *this->contents != *other.contents;
 }
+
+void swap(Slot& a, Slot& b) {
+  Slot tmp = b;
+  b = a;
+  a = tmp;
+}

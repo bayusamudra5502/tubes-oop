@@ -1,9 +1,9 @@
 #pragma once
 #include <NonToolItem.hpp>
 #include <ToolItem.hpp>
-#include <exception/SlotUnderflow.hpp>
-#include <exception/SlotOverflow.hpp>
 #include <exception/NonCompatibleItem.hpp>
+#include <exception/SlotOverflow.hpp>
+#include <exception/SlotUnderflow.hpp>
 
 class Slot {
  private:
@@ -34,4 +34,6 @@ class Slot {
   int get_occupied();
 
   void print(ostream& stream, int mxLen);
+
+  friend void swap(Slot& a, Slot& b);
 };
