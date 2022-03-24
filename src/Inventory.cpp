@@ -176,8 +176,8 @@ void Inventory::moveItem(string id, int N, vector<string> destId, Inventory* des
         }
       } 
     } catch(BaseException* e){
-        this->operator==(*tempThis);
-        dest->operator==(*tempDest);
+        this->operator=(*tempThis);
+        dest->operator=(*tempDest);
         throw e;
     }
 }

@@ -4,7 +4,7 @@ Item::Item() {
   this->name = "KOSONG";
   this->type = NULLITEM;
   this->mxStack = MXNULL;
-  this->itemId = -1;
+  this->itemId = 0;
 }
 
 Item::Item(int itemId, string name, ItemType type, int maxStack) {
