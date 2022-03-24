@@ -2,12 +2,12 @@
 
 #include <exception/BaseException.hpp>
 
-class ErrorInsertCC: public BaseException {
+class IndexOutBondCC: public BaseException {
     protected:
         int mxRow;
         int mxCol;
 
     public:
-        ErrorInsertCC(int mxRow, int mxCol);
+        IndexOutBondCC(int mxRow, int mxCol);
         virtual string what();
 };
