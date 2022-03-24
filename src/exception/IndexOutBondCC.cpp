@@ -7,8 +7,7 @@ IndexOutBondCC::IndexOutBondCC(int mxRow, int mxCol) : BaseException("Index out 
 }
 
 string IndexOutBondCC::what() {
-    string s;
-    stringstream ss(s);
+    stringstream ss;
     ss << this->getErrorName() << " has occured! You have inserted a negative input or your input is more than the capacity!";
-    return s;
+    return ss.str();
 }

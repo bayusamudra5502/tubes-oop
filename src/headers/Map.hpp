@@ -68,8 +68,10 @@ bool Map<T, U>::isKeyExist(T key) {
 template <class T, class U>
 pair<int, bool> Map<T, U>::getPosition(T key) {
   int p = 0, q = this->data.size();
-
-  while (this->data[(p + q) / 2].first != key && p < q) {
+  if(q==0){
+    return make_pair(-1, false);
+  }
+  while (p < q && this->data[(p + q) / 2].first != key) {
     T keyData = this->data[(p + q) / 2].first;
     if (keyData > key) {
       q = (p + q) / 2;
