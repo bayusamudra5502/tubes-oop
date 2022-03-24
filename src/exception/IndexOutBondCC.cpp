@@ -1,12 +1,12 @@
-#include <exception/ErrorInsertCC.hpp>
+#include <exception/IndexOutBondCC.hpp>
 #include <sstream>
 
-ErrorInsertCC::ErrorInsertCC(int mxRow, int mxCol) : BaseException("Error insert method in Collection Container") {
+IndexOutBondCC::IndexOutBondCC(int mxRow, int mxCol) : BaseException("Index out of bond in Collection Container") {
     this -> mxRow = mxRow;
     this -> mxCol = mxCol;
 }
 
-string ErrorInsertCC::what() {
+string IndexOutBondCC::what() {
     string s;
     stringstream ss(s);
     ss << this->getErrorName() << " has occured! You have inserted a negative input or your input is more than the capacity!";
