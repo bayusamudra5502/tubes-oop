@@ -97,7 +97,7 @@ char CollectionContainer::getType() const{
 
 void CollectionContainer::insertItem(Position p, Item* item, int count) {
     if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
-      // throw
+      throw new ErrorInsertCC(mxRow, mxCol);
     }
     this->container[p.row][p.col].insert(item, count);
 }
