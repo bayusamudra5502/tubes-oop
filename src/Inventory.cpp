@@ -145,7 +145,7 @@ ofstream &operator<<(ofstream &stream, const Inventory &cc) {
     for (int j = 0; j < cc.mxCol; j++) {
       stream << cc[{i, j}].get_contents()->getItemId() << ":"
              << cc[{i, j}].get_occupied();
-       stream << "\n";
+      stream << "\n";
     }
   }
   return stream;
