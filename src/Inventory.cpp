@@ -32,6 +32,14 @@ Inventory::Inventory(int mxRow, int mxCol, char type) {
   this->mxRow = mxRow;
   this->mxCol = mxCol;
   this->Type = type;
+  for (int i = 0; i < this->mxRow; i++) {
+    vector<Slot> s;
+    for (int j = 0; j < this->mxCol; j++) {
+      Slot slot(i * mxCol + j);
+      s.push_back(slot);
+    }
+    container.push_back(s);
+  }
 }
 
 // copy constructor
@@ -99,6 +107,40 @@ Slot Inventory::operator[](const Position &pos) const{
 
 char Inventory::getType() const { return this->Type; }
 
+void Inventory::giveItem(Item * item, int Qty){
+  Position idSlotKosong = {-1, -1};
+  vector<Position> pos;
+  vector<int> qtyTemp;
+  for(int i=0; i<this->mxRow&&Qty; i++){
+    for(int j=0; j<this->mxCol&&Qty; j++){
+      if(this->container[i][j].empty()&&idSlotKosong.col == -1){
+        idSlotKosong = {i, j};
+      }
+      else if(*this->container[i][j].get_contents()==*item){
+        pos.push_back({i, j});
+        Qty-=min(Qty, this->container[i][j].get_available_slot());
+        qtyTemp.push_back(this->container[i][j].get_available_slot());
+      }
+    }
+  }
+  if(Qty>0){
+    if(idSlotKosong.col==-1){
+      //throw exception
+    }
+    else{
+      this->insertItem(idSlotKosong, item, Qty);
+      for(int i=0; i<(int)pos.size(); i++){
+        this->insertItem(pos[i], item, qtyTemp[i]);
+      }
+    }
+  }
+  else{
+    for(int i=0; i<(int)pos.size(); i++){
+      this->insertItem(pos[i], item, qtyTemp[i]);
+    }
+  }
+}
+
 void Inventory::insertItem(Position p, Item* item, int count) {
     if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){
       throw new IndexOutBondCC(mxRow, mxCol, p.row, p.col);
@@ -131,7 +173,7 @@ ostream &operator<<(ostream &stream, const Inventory &cc) {
       stream << "[" << cc.getType() << (cc[{i, j}].get_id() < 10 ? " " : "")
              << cc[{i, j}].get_id() << " ";
       cc[{i, j}].get_contents()->print(stream, mx[j]);
-      stream << " " << cc[{i, j}].get_occupied();
+      stream << " " << (cc[{i, j}].get_occupied()<10?" ":"") << cc[{i, j}].get_occupied();
       stream << "] ";
     }
     stream << "\n";

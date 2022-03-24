@@ -36,7 +36,7 @@ class Inventory {
   void deleteItem(Position p, int count = 1);
 
   bool isEmpty(Position p) const;
-
+  void giveItem(Item * item, int Qty);
 
   friend ostream &operator<<(ostream &stream, const Inventory &cc);
   friend ofstream &operator<<(ofstream& stream, const Inventory &cc);
