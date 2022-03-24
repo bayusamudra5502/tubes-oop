@@ -10,3 +10,4 @@ using namespace std;
 void doDiscard(Inventory&);
 void doUse(Inventory&);
 void doCraft(CraftingTable&, Inventory&, RecipeBook);
+void doMultiCraft(CraftingTable&, Inventory&, RecipeBook);

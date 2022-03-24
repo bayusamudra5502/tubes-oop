@@ -59,8 +59,8 @@ int main() {
         doDiscard(inventory);
       } else if (command == "USE") {
         doUse(inventory);
-      } else if (command == "MULTIMOVE") {
       } else if (command == "MULTICRAFT") {
+        doMultiCraft(craftingTable, inventory, recipes);
       } else {
         cout << "Invalid command" << endl;
       }

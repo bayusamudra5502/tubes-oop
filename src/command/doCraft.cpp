@@ -14,3 +14,20 @@ void doCraft(CraftingTable& crafting, Inventory& inventory,
     throw e;
   }
 }
+
+void doMultiCraft(CraftingTable& crafting, Inventory& inventory, RecipeBook recipes){  
+  int i = 0;
+  while(true){
+    try {
+      doCraft(crafting, inventory, recipes);
+    } catch (BaseException* e) {
+      if(i==0){
+        throw e;
+      }
+      else{
+        break;
+      }
+    }
+    i++;
+  }
+}
