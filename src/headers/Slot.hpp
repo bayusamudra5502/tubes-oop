@@ -1,5 +1,6 @@
 #pragma once
-#include <Item.hpp>
+#include <NonToolItem.hpp>
+#include <ToolItem.hpp>
 
 class Slot {
  private:

@@ -82,10 +82,14 @@ int main() {
       // string slotDest;
       // need to handle multiple destinations
       //cin >> slotSrc >> slotQty >> slotDest;
-      CollectionContainer cc(3, 3);
-      cc.insertItem({0, 0}, new ToolItem(0, "HADUHAY"));
-      cout << cc;
-      cout << "TODO" << endl;
+      // CollectionContainer cc(3, 3);
+      // //cc.insertItem({0, 0}, new ToolItem(0, "HADUHAY"));
+      // cout << cc;
+      // cout << "TODO" << endl;
+      Slot* s = new Slot(1, new ToolItem(1, "BLOCK"));
+      Slot* s1 = new Slot(2, new ToolItem(1, "BLOCK"), 10);
+      Slot* s2 = new Slot(3, new NonToolItem(1, "DUAR", "DUARR"));
+      cout << (*s == *s2) << " " << (*s2==*s1) << " " << (*s==*s1) << "\n";
     } else {
       // todo
       cout << "Invalid command" << endl;
