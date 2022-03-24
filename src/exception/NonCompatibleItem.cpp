@@ -7,7 +7,7 @@ NonCompatibleItem::NonCompatibleItem(Item* item1, Item* item2): BaseException("I
 }
 
 string NonCompatibleItem::what(){
-    string s;
-    stringstream ss(s);
+    stringstream ss;
     ss << this->getErrorName() << "! " << item1->getName() << " not compatible with " << item2->getName();
+    return ss.str();
 }

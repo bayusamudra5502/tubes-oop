@@ -7,8 +7,7 @@ SlotOverflow::SlotOverflow(int mxSize, int sz) : BaseException("Slot Overflow Ex
 }
 
 string SlotOverflow::what(){
-    string s;
-    stringstream ss(s);
+    stringstream ss;
     ss << this->getErrorName() << " has occured! The available slot is " << this->mxSize << " item(s), but you inserted " << this->sz << " item(s).";
-    return s;
+    return ss.str();
 }
