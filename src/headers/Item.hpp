@@ -7,7 +7,7 @@ using namespace std;
 
 const int MXNONTOOL = 64;
 const int MXTOOL = 1;
-const int MXNULL = -1;
+const int MXNULL = 1;
 const int CATEGORY_ID = -2;
 
 class Item {

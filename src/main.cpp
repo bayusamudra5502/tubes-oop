@@ -57,12 +57,13 @@ int main() {
         string itemName;
         ssItems >> itemName;
         if (itemName != "-") {
-          vSlot.push_back(Slot(i * m + j, items[itemName], 1));
+          Slot slot(i*m+j, items[itemName], 1);
+          vSlot.push_back(slot);
         } else {
-          vSlot.push_back(Slot());
+          Slot slot(i*m+j);
+          vSlot.push_back(slot);
         }
       }
-      cout << "HI\n";
     }
     stringstream ssOut(v.back());
     string outItemName;
@@ -70,7 +71,6 @@ int main() {
     ssOut >> outItemName >> outQty;
 
     Slot outSlot(0, items[outItemName], outQty);
-    cout << outItemName << "\n";
     Recipe recipe(n, m, vSlot, outSlot);
   }
   Inventory inventory;
