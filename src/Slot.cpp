@@ -46,6 +46,7 @@ Slot& Slot::operator=(Slot& other) {
   delete this->contents;
   this->contents = other.contents->clone();
   this->available_slot = other.available_slot;
+  this->occupied = other.occupied;
   return *this;
 }
 
