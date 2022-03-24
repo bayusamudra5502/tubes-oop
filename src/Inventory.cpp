@@ -42,6 +42,7 @@ Inventory::Inventory(int mxRow, int mxCol, char type) {
   }
 }
 
+
 // copy constructor
 Inventory::Inventory(const Inventory &cc) {
   this->mxRow = cc.mxRow;
@@ -140,6 +141,43 @@ void Inventory::giveItem(Item * item, int Qty){
     }
   }
 }
+
+void Inventory::moveItem(string id, int N, vector<string> destId, Inventory* dest){
+
+  try{
+    stringstream ss(id);
+    char collectionId;
+    int posRaw;
+    ss >> collectionId >> posRaw;
+    if(this->mxCol==0){
+      //throw 
+    }
+    int col = posRaw%this->mxCol;
+    int row = posRaw/this->mxCol;
+    Item* item = this->container[row][col].get_contents()->clone();
+    this->deleteItem({row, col}, N);
+    for(int i=0; i<N; i++){
+      char cId;
+      int pRaw;
+      stringstream ssN(destId[i]);
+      ssN >> cId >> pRaw;
+      int c = pRaw%this->mxCol;
+      int r = pRaw/this->mxCol;
+      if(cId == collectionId){
+        this->insertItem({r, c}, item, 1);
+      }
+      else{
+        dest->insertItem({r, c}, item, 1);
+        cout << "HI\n";
+      }
+    } 
+  } catch(BaseException* e){
+      *this = temp;
+      dest->operator=(tempC);
+      throw e;
+  }
+}
+
 
 void Inventory::insertItem(Position p, Item* item, int count) {
     if(p.row > this->mxRow || p.row < 0 || p.col > this->mxCol || p.col < 0){

@@ -38,6 +38,7 @@ class Inventory {
 
   bool isEmpty(Position p) const;
   void giveItem(Item * item, int Qty);
+  void moveItem(string id, int N, vector<string> destId, Inventory* dest);
 
   friend ostream &operator<<(ostream &stream, const Inventory &cc);
   friend ofstream &operator<<(ofstream& stream, const Inventory &cc);
