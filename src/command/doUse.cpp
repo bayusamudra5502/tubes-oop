@@ -1,4 +1,5 @@
 #include <command.hpp>
+#include <exception/UseNonToolItem.hpp>
 #include <util.hpp>
 
 void doUse(Inventory& inventory) {
@@ -19,6 +20,6 @@ void doUse(Inventory& inventory) {
       toolItem->useItem();
     }
   } else {
-    cout << usedItem->getName() << " is not a tool." << endl;
+    throw new UseNonToolItem();
   }
 }

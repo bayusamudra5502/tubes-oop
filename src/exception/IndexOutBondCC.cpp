@@ -1,7 +1,7 @@
 #include <exception/IndexOutBondCC.hpp>
 #include <sstream>
 
-IndexOutBondCC::IndexOutBondCC(int mxRow, int mxCol, int curRow, int curCol) : BaseException("Index out of bond in Collection Container") {
+IndexOutBondCC::IndexOutBondCC(int mxRow, int mxCol, int curRow, int curCol) : BaseException("Index out of bond in inventory") {
     this -> mxRow = mxRow;
     this -> mxCol = mxCol;
     this -> curRow = curRow;
