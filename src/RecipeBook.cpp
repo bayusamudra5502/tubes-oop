@@ -27,7 +27,7 @@ Slot RecipeBook::find(const CraftingTable& ct) const {
   return this->toolRepair(ct);
 }
 
-Slot RecipeBook::toolRepair(const CraftingTable& ct) const{
+Slot RecipeBook::toolRepair(const CraftingTable& ct) const {
   vector<Position> pos;
 
   for (int i = 0; i < 3; i++) {
@@ -37,15 +37,19 @@ Slot RecipeBook::toolRepair(const CraftingTable& ct) const{
       }
     }
   }
-  if((int) pos.size() == 2){
-      int h1 = dynamic_cast<ToolItem*>(ct[pos[0]].get_contents())->getHealth();
-      int h2 = dynamic_cast<ToolItem*>(ct[pos[1]].get_contents())->getHealth();
-      ToolItem* tmp = dynamic_cast<ToolItem*>(ct[pos[0]].get_contents());
-      ToolItem* tmp2 = dynamic_cast<ToolItem*>(ct[pos[1]].get_contents());
-      if(tmp->getItemId()==tmp2->getItemId()){
-        tmp->setHealth(min(h1+h2, 10));
-        return *(new Slot(tmp->getItemId(), new ToolItem(*tmp), 1));
-      }
+  if ((int)pos.size() == 2) {
+    int h1 = dynamic_cast<ToolItem*>(ct[pos[0]].get_contents())->getHealth();
+    int h2 = dynamic_cast<ToolItem*>(ct[pos[1]].get_contents())->getHealth();
+    Item* t1 = ct[pos[0]].get_contents()->clone();
+    Item* t2 = ct[pos[1]].get_contents()->clone();
+
+    ToolItem* tmp = dynamic_cast<ToolItem*>(t1);
+    ToolItem* tmp2 = dynamic_cast<ToolItem*>(t2);
+
+    if (tmp->getItemId() == tmp2->getItemId()) {
+      tmp->setHealth(min(h1 + h2, 10));
+      return (Slot(tmp->getItemId(), new ToolItem(*tmp), 1));
+    }
   }
   throw new NoRecipe();
 }
