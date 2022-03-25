@@ -17,3 +17,4 @@ struct InventoryMap {
 };
 
 struct InventoryMap extractId(string id, int maxCol);
+string toUpperCase(const string &str);
