@@ -11,5 +11,7 @@ void doDiscard(Inventory& inventory) {
   }
 
   struct InventoryMap map = extractId(location, MAX_INVENTORY_COL);
+  string s = inventory[{map.row, map.col}].get_contents()->getName();
   inventory.deleteItem({map.row, map.col}, count);
+  cout << "\nDiscard complete. " << count << " item(s) of " << s << " has been discarded.\n\n";  
 }

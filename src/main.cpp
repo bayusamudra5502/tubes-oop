@@ -51,13 +51,13 @@ int main() {
         doUse(inventory);
       } else if (command == "MULTICRAFT") {
         doMultiCraft(craftingTable, inventory, recipes);
-      } else {
+      } else if (command == "HELP"){
+        help();
+      }else {
         throw new WrongCommandException(INVALID_COMMAND);
       }
     } catch (BaseException* e) {
       cout << e->what() << "\n";
-    } catch(invalid_argument* e){
-      cout << "invalid_argument: " << e->what() << "\n";
     }
   }
   return 0;

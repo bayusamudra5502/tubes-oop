@@ -8,6 +8,7 @@ void doCraft(CraftingTable& crafting, Inventory& inventory,
     Slot res = recipes.find(crafting);
     crafting.craft();
     inventory.giveItem(res.get_contents(), res.get_occupied());
+    cout << "\nCongratulations! You crafted " << res.get_occupied() << " item(s) of " << res.get_contents()->getName() << "\n\n";
   } catch (BaseException* e) {
     crafting = tempC;
     inventory = tempI;

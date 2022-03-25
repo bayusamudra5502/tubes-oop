@@ -16,4 +16,5 @@ void doMove(Inventory& inventory, CraftingTable& craftingTable){
     } else {
         craftingTable.moveItem(src, N, dest, &inventory);
     }
+    cout << "\nYou successfully moved " << N << " item(s).\n\n";
 }

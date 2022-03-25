@@ -10,7 +10,9 @@ void doUse(Inventory& inventory) {
   }
   struct InventoryMap map = extractId(location, MAX_INVENTORY_COL);
   inventory.useItem(map.row, map.col);
+  string s = inventory[{map.row, map.col}].get_contents()->getName();
   if(dynamic_cast<ToolItem*>(inventory[{map.row, map.col}].get_contents())->getHealth()==0){
     inventory.deleteItem({map.row, map.col});
   }
+  cout << "\nUsed item " << s << "\n\n";
 }

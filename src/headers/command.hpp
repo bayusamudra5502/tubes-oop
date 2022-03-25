@@ -17,3 +17,4 @@ void doExport(Inventory inventory);
 void doShow(Inventory inventory, CraftingTable craftingTable);
 void doGive(Inventory& inventory, Map<string, Item*> items);
 void doMove(Inventory& inventory, CraftingTable& craftingTable);
+void help();

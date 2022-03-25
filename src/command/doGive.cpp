@@ -8,4 +8,5 @@ void doGive(Inventory& inventory, Map<string, Item*> items){
         throw new WrongCommandException(INVALID_PARAMETER);
     }
     inventory.giveItem(items[itemName], itemQty);
+    cout << "\nYou have been given " << itemQty << " item(s) of " << itemName << "\n\n";
 }

@@ -20,4 +20,5 @@ void doMultiMove(CraftingTable& ct, Inventory& i) {
 
   ct = ctTmp;
   i = iTmp;
+  cout << "\nYou successfully moved " << n << " item(s).\n\n";
 }
