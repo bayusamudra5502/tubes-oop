@@ -5,7 +5,7 @@ void doMultiMove(CraftingTable& ct, Inventory& i) {
   string src, dest;
 
   cin >> src >> n >> dest;
-  if(n<=0){
+  if (n <= 0) {
     throw new WrongCommandException(INVALID_PARAMETER);
   }
   CraftingTable ctTmp(ct);
@@ -20,5 +20,5 @@ void doMultiMove(CraftingTable& ct, Inventory& i) {
 
   ct = ctTmp;
   i = iTmp;
-  cout << "\nYou successfully moved " << n << " item(s).\n\n";
+  cout << "\nYou successfully moved \x1B[33m" << n << "\x1B[0m item(s).\n\n";
 }

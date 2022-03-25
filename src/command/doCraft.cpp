@@ -8,7 +8,9 @@ void doCraft(CraftingTable& crafting, Inventory& inventory,
     Slot res = recipes.find(crafting);
     crafting.craft();
     inventory.giveItem(res.get_contents(), res.get_occupied());
-    cout << "\nCongratulations! You crafted " << res.get_occupied() << " item(s) of " << res.get_contents()->getName() << "\n\n";
+    cout << "\nCongratulations! You crafted \x1B[33m" << res.get_occupied()
+         << "\x1B[0m item(s) of \x1B[36m" << res.get_contents()->getName()
+         << "\x1B[0m\n\n";
   } catch (BaseException* e) {
     crafting = tempC;
     inventory = tempI;
@@ -16,16 +18,16 @@ void doCraft(CraftingTable& crafting, Inventory& inventory,
   }
 }
 
-void doMultiCraft(CraftingTable& crafting, Inventory& inventory, RecipeBook recipes){  
+void doMultiCraft(CraftingTable& crafting, Inventory& inventory,
+                  RecipeBook recipes) {
   int i = 0;
-  while(true){
+  while (true) {
     try {
       doCraft(crafting, inventory, recipes);
     } catch (BaseException* e) {
-      if(i==0){
+      if (i == 0) {
         throw e;
-      }
-      else{
+      } else {
         break;
       }
     }

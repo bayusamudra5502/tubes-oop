@@ -4,6 +4,7 @@
 #include <RecipeBook.hpp>
 #include <command.hpp>
 #include <exception/BaseException.hpp>
+#include <exception/WrongCommandException.hpp>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -11,7 +12,6 @@
 #include <sstream>
 #include <string>
 #include <util.hpp>
-#include <exception/WrongCommandException.hpp>
 using namespace std;
 
 int main() {
@@ -31,7 +31,10 @@ int main() {
 
   // sample interaction
   string command;
+  cout << "\x1B[34m>\x1B[0m ";
   while (cin >> command) {
+    command = toUpperCase(command);
+
     try {
       if (command == "EXPORT") {
         doExport(inventory);
@@ -51,14 +54,18 @@ int main() {
         doUse(inventory);
       } else if (command == "MULTICRAFT") {
         doMultiCraft(craftingTable, inventory, recipes);
-      } else if (command == "HELP"){
+      } else if (command == "HELP") {
         help();
-      }else {
+      } else if (command == "EXIT") {
+        return 0;
+      } else {
         throw new WrongCommandException(INVALID_COMMAND);
       }
     } catch (BaseException* e) {
-      cout << e->what() << "\n";
+      cout << "\x1B[31m" << e->what() << "\x1B[0m\n";
     }
+
+    cout << "\x1B[34m>\x1B[0m ";
   }
   return 0;
 }
