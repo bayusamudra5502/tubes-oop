@@ -5,7 +5,9 @@ void doMultiMove(CraftingTable& ct, Inventory& i) {
   string src, dest;
 
   cin >> src >> n >> dest;
-
+  if(n<=0){
+    throw new WrongCommandException(INVALID_PARAMETER);
+  }
   CraftingTable ctTmp(ct);
   Inventory iTmp(i);
 

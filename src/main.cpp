@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include <util.hpp>
+#include <exception/WrongCommandException.hpp>
 using namespace std;
 
 int main() {
@@ -33,33 +34,14 @@ int main() {
   while (cin >> command) {
     try {
       if (command == "EXPORT") {
-        string outputPath;
-        cin >> outputPath;
-        ofstream outputFile(outputPath);
-        outputFile << inventory;
+        doExport(inventory);
       } else if (command == "SHOW") {
-        cout << craftingTable << "\n";
-        cout << inventory << "\n";
       } else if (command == "CRAFT") {
         doCraft(craftingTable, inventory, recipes);
       } else if (command == "GIVE") {
-        string itemName;
-        int itemQty;
-        cin >> itemName >> itemQty;
-        inventory.giveItem(items[itemName], itemQty);
+        doGive(inventory, items);
       } else if (command == "MOVE") {
-        string src;
-        int N;
-        cin >> src >> N;
-        vector<string> dest(N);
-        for (int i = 0; i < N; i++) {
-          cin >> dest[i];
-        }
-        if (src[0] == 'I') {
-          inventory.moveItem(src, N, dest, &craftingTable);
-        } else {
-          craftingTable.moveItem(src, N, dest, &inventory);
-        }
+        doMove(inventory, craftingTable);
       } else if (command == "MULTIMOVE") {
         doMultiMove(craftingTable, inventory);
       } else if (command == "DISCARD") {
@@ -69,10 +51,12 @@ int main() {
       } else if (command == "MULTICRAFT") {
         doMultiCraft(craftingTable, inventory, recipes);
       } else {
-        cout << "Invalid command" << endl;
+        throw new WrongCommandException(INVALID_COMMAND);
       }
     } catch (BaseException* e) {
       cout << e->what() << "\n";
+    } catch(invalid_argument e){
+      cout << "invalid_argument: " << e.what() << "\n";
     }
   }
   return 0;
