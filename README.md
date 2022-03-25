@@ -55,7 +55,9 @@ make test
   - Pickaxe
   - Axe
   - Sword 
+
 ** New Items **
+
 - Bowl
 - Warped Stem
 - Warped Plank
