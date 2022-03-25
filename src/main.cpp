@@ -28,7 +28,9 @@ int main() {
 
   Inventory inventory;
   CraftingTable craftingTable;
-
+  cout << "\nWELCOME TO TAMBANG JAYA!\n";
+  cout << "=============================================\n";
+  cout << "type HELP to find out what to do\n\n";
   // sample interaction
   string command;
   while (cin >> command) {
