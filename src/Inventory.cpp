@@ -238,8 +238,14 @@ ostream &operator<<(ostream &stream, const Inventory &cc) {
 ofstream &operator<<(ofstream &stream, const Inventory &cc) {
   for (int i = 0; i < cc.mxRow; i++) {
     for (int j = 0; j < cc.mxCol; j++) {
-      stream << cc[{i, j}].get_contents()->getItemId() << ":"
-             << cc[{i, j}].get_occupied();
+      stream << cc[{i, j}].get_contents()->getItemId() << ":";
+      if (cc[{i, j}].get_contents()->getType() == TOOLS) {
+        Item *cp = cc[{i, j}].get_contents()->clone();
+        ToolItem *ti = dynamic_cast<ToolItem *>(cp);
+        stream << ti->getHealth();
+      } else {
+        stream << cc[{i, j}].get_occupied();
+      }
       stream << "\n";
     }
   }
