@@ -28,9 +28,9 @@ int main() {
 
   Inventory inventory;
   CraftingTable craftingTable;
-  cout << "\nWELCOME TO TAMBANG JAYA!\n";
-  cout << "=============================================\n";
-  cout << "type HELP to find out what to do\n\n";
+  cout << "\n\x1B[32mWELCOME TO TAMBANG JAYA!\x1B[0m\n";
+  cout << "\x1B[36m=============================================\n\x1B[0m";
+  cout << "type \x1B[33mHELP\x1B[0m to find out what to do\n\n";
   // sample interaction
   string command;
   cout << "\x1B[34m>\x1B[0m ";
