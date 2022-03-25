@@ -9,7 +9,7 @@ void help() {
   cout << "- \x1B[36mMOVE \x1B[33mSRCID N DESTID1 DESTID2 ... DESTIDN\x1B[0m : "
           "Moving "
           "N items to the N desired destination, divided equally\n";
-  cout << "- \x1B[36mMULTIMOVE \x1B[33mSRCID N DESTID1 DESTID2 ...\x1B[0m : "
+  cout << "- \x1B[36mMULTIMOVE \x1B[33mSRCID N DESTID\x1B[0m : "
           "Moving N "
           "items to the variable-sized desired destination, divided equally\n";
   cout << "- \x1B[36mCRAFT\x1B[0m : Crafting current state of crafting table\n";
