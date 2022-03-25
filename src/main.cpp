@@ -17,8 +17,13 @@ int main() {
   Map<string, Item*> items;
   RecipeBook recipes;
 
-  loadItem(items);
-  loadRecipe(items, recipes);
+  try {
+    loadItem(items);
+    loadRecipe(items, recipes);
+  } catch (BaseException* err) {
+    cerr << err->what() << endl;
+    return -1;
+  }
 
   Inventory inventory;
   CraftingTable craftingTable;
