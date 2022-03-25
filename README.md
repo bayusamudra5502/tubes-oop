@@ -1,31 +1,49 @@
-# Minecraft-Template
+# Mobita The Crafter
 
-Template repository for Tubes 1 IF2210 2021/2022. Feel free to replace this README with your own content.
+### Tugas Besar IF2210 Pemrograman Berbasis Objek
 
-## What's Inside
-This template consists of:
-- config folder containing all the config files (items and recipes)
-- tests folder containing two sample test files (input and answer)
-- main.cpp containing the sample main code
-- check.cpp containing the code for checking
-- makefile for compiling and testing
+This repository is a solution of the nobita's problem. This program in this repository is adapted from inventory system and crafting table in minecraft.
 
-## Running the Makefile
-Make sure you are using Linux with C++17. WSL also works if you are using Windows.
+## Directory Structure
+
+This repository consists of:
+
+- `config` containing all the config files (items and recipes)
+- `tests` containing unit test and end to end sample test (input and answer)
+- `src` containing sources code
+- `doc` containing Class Diagram and the document
+
+## Running the program
+
+Make sure you are using Linux with C++17. WSL also works if you are using Windows. To install all depedencies, you can run this command:
+
+```shell
+sudo apt install make g++
 ```
-sudo apt-get install make g++
-make all
+
+To run the program, run below command:
+
+```shell
+make run
 ```
-Using the sample main file, it should return that 1 out of 2 tests passed.
 
-## Adding More Tests
-You can add more tests by adding more files to the tests folder. Tests consists of two files, input with "in" extension and answer with "ans" extension. Each test should have exactly one EXPORT command which exports the current inventory into an "out" file in the tests folder. Please refer to the sample tests. Checking will be done by comparing the answer file and the output file.
+## Running Tests
 
-As the test is done by comparing the output files, you can freely use standard output in your program.
+To run all tests, you have to install Google Test library. To install the depedency, you can run this command:
 
-Automated testing will not work if you are using GUI (obviously).
+```shell
+sudo apt install libgtest-dev make g++
+```
+
+To run tests, run below command:
+
+```shell
+make test
+```
 
 ## Authors
+
+We are from 'Tambang Jaya' group (Group number 10) and this is our members:
 
 - Hana Fathiyah - 13520047
 - Yohana Golkaria Nainggolan - 13520053
