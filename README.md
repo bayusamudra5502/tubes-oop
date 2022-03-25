@@ -42,8 +42,34 @@ make test
 ```
 
 ## Items
+- Log (Oak, Spruce, Birch)
+- Plank (Oak, Spruce, Birch)
+- Stick
+- Stone
+  - Cobblestone
+  - Blackstone
+- Iron Ingot
+- Iron Nugget
+- Diamond
+- Tools (Wooden, Stone, Iron, Diamond)
+  - Pickaxe
+  - Axe
+  - Sword 
+** New Items **
+- Bowl
+- Warped Stem
+- Warped Plank
+- Furnace
+- Crafting Table
+- Oak Door
+- Spruce Door
+- Birch Door
+- Warped Door
+- Wooden/Stone/Iron/Diamond Shovel
+- Wooden/Stone/Iron/Diamond Hoe
 
-## 
+## Recipe
+
 
 ## Commands
 - `EXPORT PATH`: Export inventory to PATH
