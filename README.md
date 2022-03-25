@@ -41,6 +41,22 @@ To run tests, run below command:
 make test
 ```
 
+## Items
+
+## 
+
+## Commands
+- `EXPORT PATH`: Export inventory to PATH
+- `SHOW`: Show current inventory and crafting table
+- `CRAFT`: Crafting current state of crafting table
+- `MULTICRAFT`: Crafting current state of crafting table all the way to non-recipe state
+- `GIVE ITEMNAME ITEMQTY`: Give ITEMQTY of ITEMNAME
+- `MOVE SRCID N DESTID1 DESTID2 ... DESTIDN`: Moving N items to the N desired destination, divided equally
+- `MULTIMOVE SRCID N DESTID`: Moving N items to one desired destination
+- `DISCARD SRCID ITEMQTY`: Delete ITEMQTY items from SRCID
+- `USE SRCID`: Use tool item in SRCID
+- `HELP`: Show help
+
 ## Authors
 
 We are from 'Tambang Jaya' group (Group number 10) and this is our members:
