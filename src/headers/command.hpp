@@ -10,4 +10,5 @@ using namespace std;
 void doDiscard(Inventory&);
 void doUse(Inventory&);
 void doCraft(CraftingTable&, Inventory&, RecipeBook);
+void doMultiMove(CraftingTable&, Inventory&);
 void doMultiCraft(CraftingTable&, Inventory&, RecipeBook);

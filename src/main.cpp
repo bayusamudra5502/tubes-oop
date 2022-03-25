@@ -55,6 +55,8 @@ int main() {
         } else {
           craftingTable.moveItem(src, N, dest, &inventory);
         }
+      } else if (command == "MULTIMOVE") {
+        doMultiMove(craftingTable, inventory);
       } else if (command == "DISCARD") {
         doDiscard(inventory);
       } else if (command == "USE") {

@@ -121,7 +121,7 @@ void Inventory::giveItem(Item *item, int Qty) {
         pos.push_back({i, j});
         int tmp = min(Qty, this->container[i][j].get_available_slot());
         qtyTemp.push_back(tmp);
-        Qty-=tmp;
+        Qty -= tmp;
       }
     }
   }
@@ -142,6 +142,7 @@ void Inventory::giveItem(Item *item, int Qty) {
 }
 
 Inventory *Inventory::clone() { return new Inventory(*this); }
+
 void Inventory::moveItem(string id, int N, vector<string> destId,
                          Inventory *dest) {
   Inventory *tempThis = this->clone();
@@ -150,26 +151,37 @@ void Inventory::moveItem(string id, int N, vector<string> destId,
     stringstream ss(id);
     char collectionId;
     int posRaw;
+
     ss >> collectionId >> posRaw;
+
     int row = posRaw / this->getmxCol();
     int col = posRaw % this->getmxCol();
+
     Item *item = this->container[row][col].get_contents();
     this->deleteItem({row, col}, N);
-    for (int i = 0; i < N; i++) {
+
+    int rem = N % destId.size();
+
+    for (int i = 0; i < (int)destId.size(); i++) {
       char cId;
       int pRaw;
+
       stringstream ssN(destId[i]);
       ssN >> cId >> pRaw;
       if (cId != collectionId) {
         col = pRaw % dest->getmxCol();
         row = pRaw / dest->getmxCol();
-        dest->insertItem({row, col}, item, 1);
+        dest->insertItem({row, col}, item, N / destId.size() + rem);
       } else {
         col = pRaw % this->getmxCol();
         row = pRaw / this->getmxCol();
-        this->insertItem({row, col}, item, 1);
+        this->insertItem({row, col}, item, N / destId.size() + rem);
       }
+
+      rem--;
+      rem = rem > 0 ? rem : 0;
     }
+
   } catch (BaseException *e) {
     this->operator=(*tempThis);
     dest->operator=(*tempDest);
@@ -177,7 +189,7 @@ void Inventory::moveItem(string id, int N, vector<string> destId,
   }
 }
 
-void Inventory::useItem(int row, int col){
+void Inventory::useItem(int row, int col) {
   this->container[row][col].useItem();
 }
 
