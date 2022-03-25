@@ -70,9 +70,6 @@ make test
 - Wooden/Stone/Iron/Diamond Shovel
 - Wooden/Stone/Iron/Diamond Hoe
 
-## Recipe
-
-
 ## Commands
 - `EXPORT PATH`: Export inventory to PATH
 - `SHOW`: Show current inventory and crafting table
@@ -84,6 +81,9 @@ make test
 - `DISCARD SRCID ITEMQTY`: Delete ITEMQTY items from SRCID
 - `USE SRCID`: Use tool item in SRCID
 - `HELP`: Show help
+
+## Screenshot
+![Main Program](img/main.png "Main Program")
 
 ## Authors
 
