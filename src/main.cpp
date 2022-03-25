@@ -36,6 +36,7 @@ int main() {
       if (command == "EXPORT") {
         doExport(inventory);
       } else if (command == "SHOW") {
+        doShow(inventory, craftingTable);
       } else if (command == "CRAFT") {
         doCraft(craftingTable, inventory, recipes);
       } else if (command == "GIVE") {
@@ -55,8 +56,8 @@ int main() {
       }
     } catch (BaseException* e) {
       cout << e->what() << "\n";
-    } catch(invalid_argument e){
-      cout << "invalid_argument: " << e.what() << "\n";
+    } catch(invalid_argument* e){
+      cout << "invalid_argument: " << e->what() << "\n";
     }
   }
   return 0;
